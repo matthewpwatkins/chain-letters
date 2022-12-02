@@ -7,6 +7,7 @@ const ALPHA_REGEX = /^[a-z]+$/i;
 const App = () => {
   const [inputWord, setInputWord] = useState('');
   const [linkWords, setLinkWords] = useState([]);
+  const [gameFinished, setGameFinished] = useState(false);
   const [puzzle, setPuzzle] = useState({});
 
   useEffect(() => { load(); }, []);
@@ -54,6 +55,7 @@ const App = () => {
       a.push(inputWord);
       setInputWord('');
       if (inputWord === puzzle.destination_word) {
+        setGameFinished(true);
         alert(`You won in ${a.length} turns!`);
       }
       return a;
@@ -72,14 +74,21 @@ const App = () => {
         <p key={linkWord}>{linkWord}</p>
       ))}
     </div>
-    <div>
-      <input
-        placholder="Search for movies"
-        value={inputWord}
-        onChange={(e) => { setInputWord(e.target.value) }}
-      />
-    </div>
-    <button onClick={onSubmitWord}>Add</button>
+
+    {(
+      gameFinished ? (<></>) : <div>
+        <input
+          value={inputWord}
+          onKeyUp={(e) => {
+            if (e.code === 'Enter') {
+              onSubmitWord();
+            }
+          }}
+          onChange={(e) => { setInputWord(e.target.value) }}
+        />
+        <button onClick={onSubmitWord}>Add</button>
+      </div>
+    )}
   </>);
 };
 
