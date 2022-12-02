@@ -1,19 +1,3 @@
-const wordsAreCloseEnough = (a, b) => {
-  const lDist = getLevenshteinDistance(a, b);
-
-  if (lDist === 1) {
-    // Single insertion or deletion
-    return true;
-  }
-
-  if (lDist === 2 && isSingleLetterSwap(a, b)) {
-    return true;
-  }
-
-  // Too many changes
-  return false;
-};
-
 // https://www.tutorialspoint.com/levenshtein-distance-in-javascript
 const getLevenshteinDistance = (a, b) => {
   const track = Array(b.length + 1)
@@ -59,4 +43,23 @@ const isSingleLetterSwap = (a, b) => {
     && b[diffIndices[0]] === a[diffIndices[1]];
 };
 
-export default wordsAreCloseEnough;
+exports.wordsAreCloseEnough = (a, b) => {
+  const lDist = getLevenshteinDistance(a, b);
+
+  if (lDist === 1) {
+    // Single insertion or deletion
+    return true;
+  }
+
+  if (lDist === 2 && isSingleLetterSwap(a, b)) {
+    return true;
+  }
+
+  // Too many changes
+  return false;
+};
+
+exports.wordExists = async (word) => {
+  const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+  return res.ok;
+};

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import wordsAreCloseEnough from './WordJudge';
+import { wordsAreCloseEnough, wordExists } from './WordJudge';
 
 const ALPHA_REGEX = /^[a-z]+$/i;
 
@@ -16,7 +16,7 @@ const App = () => {
     });
   };
 
-  const onSubmitWord = () => {
+  const onSubmitWord = async () => {
     const sanitizedInputWord = inputWord?.trim().toLocaleLowerCase();
     if (!(sanitizedInputWord?.length)) {
       alert("No word entered");
@@ -38,6 +38,11 @@ const App = () => {
 
     if (!wordsAreCloseEnough(previousWord, sanitizedInputWord)) {
       alert("Not close enough");
+      return;
+    }
+
+    if (!(await wordExists(sanitizedInputWord))) {
+      alert("Word doesn't exist");
       return;
     }
 
