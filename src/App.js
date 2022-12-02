@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import wordsAreCloseEnough from './WordJudge';
 
 const App = () => {
   const [inputWord, setInputWord] = useState('');
@@ -14,12 +15,21 @@ const App = () => {
   };
 
   const onSubmitWord = () => {
-    setLinkWords(l => {
-      const a = [...l];
-      a.push(inputWord);
-      return a;
-    });
-    setInputWord('');
+    const sanitizedInputWord = inputWord?.trim().toLocaleLowerCase();
+    if (sanitizedInputWord?.length) {
+      const previousWord = linkWords.length
+        ? linkWords[linkWords.length - 1] : puzzle.sourceWord;
+      if (wordsAreCloseEnough(previousWord, sanitizedInputWord)) {
+        setLinkWords(l => {
+          const a = [...l];
+          a.push(inputWord);
+          return a;
+        });
+        setInputWord('');
+        return;
+      }
+    }
+    alert('No bueno, señor');
   }
 
   useEffect(() => {
