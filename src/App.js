@@ -65,7 +65,12 @@ const App = () => {
   }
 
   return (<div className='container-fluid app-container'>
-    <h1 className="display-5 mb-4 text-center">⛓️ Chain Letters 🔡</h1>
+    <h1 className="display-5 my-3 text-center">⛓️ Chain Letters 🔡</h1>
+    <p className="lead text-center">
+      <span>&#x2014;</span>
+      <span className="mx-3">{dateString}</span>
+      <span>&#x2014;</span>
+    </p>
     <div className="card my-3">
       <ul className="list-group list-group-flush">
         <li className="list-group-item bg-primary text-light">
