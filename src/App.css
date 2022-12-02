@@ -1,0 +1,10 @@
+.app-container {
+  max-width: 500px;
+}
+
+.word-box {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+}
