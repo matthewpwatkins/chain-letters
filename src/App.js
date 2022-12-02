@@ -26,28 +26,27 @@ const App = () => {
     load();
   }, []);
 
-  return (
-    <>
-      <h1>Title</h1>
-      {puzzle?.sourceWord ? (<>
-        <div>{puzzle.sourceWord}</div>
-        <div>
-          {linkWords.map(linkWord => (
-            <p key={linkWord}>{linkWord}</p>
-          ))}
-        </div>
-        <div>
-          <input
-            placholder="Search for movies"
-            value={inputWord}
-            onChange={(e) => { setInputWord(e.target.value) }}
-          />
-        </div>
-        <button onClick={onSubmitWord}>Add</button>
-        <div>{puzzle.destinationWord}</div>
-      </>) : (<></>)}
-    </>
-  );
+  return (<>
+    <h1>Chain Letters</h1>
+    <div>
+      <span>{puzzle.sourceWord}</span>
+      &nbsp;&rarr;&nbsp;
+      <span>{puzzle.destinationWord}</span>
+    </div>
+    <div>
+      {linkWords.map(linkWord => (
+        <p key={linkWord}>{linkWord}</p>
+      ))}
+    </div>
+    <div>
+      <input
+        placholder="Search for movies"
+        value={inputWord}
+        onChange={(e) => { setInputWord(e.target.value) }}
+      />
+    </div>
+    <button onClick={onSubmitWord}>Add</button>
+  </>);
 };
 
 export default App;
