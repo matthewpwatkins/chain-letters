@@ -9,11 +9,14 @@ const App = () => {
   const [linkWords, setLinkWords] = useState([]);
   const [puzzle, setPuzzle] = useState({});
 
-  const load = () => {
-    setPuzzle({
-      sourceWord: 'out',
-      destinationWord: 'side'
-    });
+  useEffect(() => { load(); }, []);
+
+  const load = async () => {
+    const puzzlePath = `${process.env.PUBLIC_URL}/puzzles/${new Date().toISOString().substring(0, 10)}.json`;
+    const res = await fetch(puzzlePath);
+    const responsePuzzle = await res.json();
+    console.group(responsePuzzle);
+    setPuzzle(responsePuzzle);
   };
 
   const onSubmitWord = async () => {
@@ -28,13 +31,13 @@ const App = () => {
       return;
     }
 
-    if (sanitizedInputWord === puzzle.sourceWord || linkWords.includes(inputWord)) {
+    if (sanitizedInputWord === puzzle.source_word || linkWords.includes(inputWord)) {
       alert("No word reuse");
       return;
     }
 
     const previousWord = linkWords.length
-      ? linkWords[linkWords.length - 1] : puzzle.sourceWord;
+      ? linkWords[linkWords.length - 1] : puzzle.source_word;
 
     if (!wordsAreCloseEnough(previousWord, sanitizedInputWord)) {
       alert("Not close enough");
@@ -50,23 +53,19 @@ const App = () => {
       const a = [...l];
       a.push(inputWord);
       setInputWord('');
-      if (inputWord === puzzle.destinationWord) {
+      if (inputWord === puzzle.destination_word) {
         alert(`You won in ${a.length} turns!`);
       }
       return a;
     });
   }
 
-  useEffect(() => {
-    load();
-  }, []);
-
   return (<>
     <h1>Chain Letters</h1>
     <div>
-      <span>{puzzle.sourceWord}</span>
+      <span>{puzzle.source_word}</span>
       &nbsp;&rarr;&nbsp;
-      <span>{puzzle.destinationWord}</span>
+      <span>{puzzle.destination_word}</span>
     </div>
     <div>
       {linkWords.map(linkWord => (
