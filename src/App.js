@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import wordsAreCloseEnough from './WordJudge';
 
+const ALPHA_REGEX = /^[a-z]+$/i;
+
 const App = () => {
   const [inputWord, setInputWord] = useState('');
   const [linkWords, setLinkWords] = useState([]);
@@ -9,27 +11,45 @@ const App = () => {
 
   const load = () => {
     setPuzzle({
-      sourceWord: 'please',
-      destinationWord: 'thank'
+      sourceWord: 'out',
+      destinationWord: 'side'
     });
   };
 
   const onSubmitWord = () => {
     const sanitizedInputWord = inputWord?.trim().toLocaleLowerCase();
-    if (sanitizedInputWord?.length) {
-      const previousWord = linkWords.length
-        ? linkWords[linkWords.length - 1] : puzzle.sourceWord;
-      if (wordsAreCloseEnough(previousWord, sanitizedInputWord)) {
-        setLinkWords(l => {
-          const a = [...l];
-          a.push(inputWord);
-          return a;
-        });
-        setInputWord('');
-        return;
-      }
+    if (!(sanitizedInputWord?.length)) {
+      alert("No word entered");
+      return;
     }
-    alert('No bueno, señor');
+
+    if (!ALPHA_REGEX.test(sanitizedInputWord)) {
+      alert("Please use A-Z only, please.");
+      return;
+    }
+
+    if (sanitizedInputWord === puzzle.sourceWord || linkWords.includes(inputWord)) {
+      alert("No word reuse");
+      return;
+    }
+
+    const previousWord = linkWords.length
+      ? linkWords[linkWords.length - 1] : puzzle.sourceWord;
+
+    if (!wordsAreCloseEnough(previousWord, sanitizedInputWord)) {
+      alert("Not close enough");
+      return;
+    }
+
+    setLinkWords(l => {
+      const a = [...l];
+      a.push(inputWord);
+      setInputWord('');
+      if (inputWord === puzzle.destinationWord) {
+        alert(`You won in ${a.length} turns!`);
+      }
+      return a;
+    });
   }
 
   useEffect(() => {
