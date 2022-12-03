@@ -13,13 +13,23 @@ const App = () => {
   useEffect(() => { load(); }, []);
 
   const load = async () => {
-    const newDateString = new Date().toISOString().substring(0, 10);
+    const newDateString = getShortDateString(new Date());
     setDateString(newDateString);
     const puzzlePath = `${process.env.PUBLIC_URL}/puzzles/${newDateString}.json`;
     const res = await fetch(puzzlePath);
     const responsePuzzle = await res.json();
-    console.group(responsePuzzle);
     setPuzzle(responsePuzzle);
+  };
+
+  const lPadZeroNumber = (number, length) => {
+    return (number + "").padStart(length, "0");
+  };
+
+  const getShortDateString = (date) => {
+    const year = lPadZeroNumber(date.getFullYear(), 4);
+    const month = lPadZeroNumber(date.getMonth() + 1, 2);
+    const dayOfMonth = lPadZeroNumber(date.getDate(), 2);
+    return `${year}-${month}-${dayOfMonth}`;
   };
 
   // https://www.tutorialspoint.com/levenshtein-distance-in-javascript
@@ -139,8 +149,8 @@ const App = () => {
     <div className="card my-3">
       <ul className="list-group list-group-flush">
         <li className="list-group-item bg-primary text-light">
-          <span class="word-box">{puzzle.source_word}
-            &nbsp;<i class="fa-solid fa-arrow-right"></i>&nbsp;
+          <span className="word-box">{puzzle.source_word}
+            &nbsp;<i className="fa-solid fa-arrow-right"></i>&nbsp;
             {puzzle.destination_word}
           </span>
         </li>
@@ -156,8 +166,8 @@ const App = () => {
 
           return (
             <li key={linkWord} className={liClassName}>
-              <span class={indexClassName}>{index + 1}</span>
-              <span class="word-box">{linkWord}</span>
+              <span className={indexClassName}>{index + 1}</span>
+              <span className="word-box">{linkWord}</span>
             </li>
           );
         })}
@@ -165,7 +175,7 @@ const App = () => {
           <div className="input-group">
             <input
               type="text"
-              class="form-control m-0 border-0"
+              className="form-control m-0 border-0"
               value={inputWord}
               placeholder="Next word..."
               onKeyUp={(e) => { if (e.code === 'Enter') { onSubmitWord(); } }}
