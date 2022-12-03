@@ -216,6 +216,13 @@ const App = () => {
         )}
       </ListGroup>
     </Card>
+
+    {(gameFinished ? (<div className="d-grid gap-2">
+      <Button variant="success" size="lg" onClick={share}>
+        <i class="fa-solid fa-share-nodes"></i> Share
+      </Button>
+    </div>) : (<></>))}
+
     <Modal show={showWinModal} fullscreen="sm-down" onHide={() => setShowWinModal(false)}>
       <Modal.Header closeButton>
         <Modal.Title>🎉 You won!</Modal.Title>
