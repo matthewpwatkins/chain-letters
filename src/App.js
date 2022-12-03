@@ -222,7 +222,7 @@ const App = () => {
       </Button>
     </div>) : (<></>))}
 
-    <Modal show={showWinModal} fullscreen="sm-down" onHide={() => setShowWinModal(false)}>
+    <Modal show={showWinModal} fullscreen="sm-down" centered onHide={() => setShowWinModal(false)}>
       <Modal.Header closeButton>
         <Modal.Title>🎉 You won!</Modal.Title>
       </Modal.Header>
