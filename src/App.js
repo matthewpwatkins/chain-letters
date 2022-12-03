@@ -138,9 +138,9 @@ const App = () => {
 
     setLinkWords(l => {
       const a = [...l];
-      a.push(inputWord);
+      a.push(sanitizedInputWord);
       setInputWord('');
-      if (inputWord === puzzle.destination_word) {
+      if (sanitizedInputWord === puzzle.destination_word) {
         setGameFinished(true);
         setShowWinModal(true);
       }
