@@ -4,9 +4,9 @@ import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
-import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import Badge from 'react-bootstrap/Badge';
+import Modal from 'react-bootstrap/Modal';
 
 const ALPHA_REGEX = /^[a-z]+$/i;
 
@@ -16,6 +16,7 @@ const App = () => {
   const [linkWords, setLinkWords] = useState([]);
   const [gameFinished, setGameFinished] = useState(false);
   const [puzzle, setPuzzle] = useState({});
+  const [showWinModal, setShowWinModal] = useState(false);
 
   useEffect(() => {
     const lPadZeroNumber = (number, length) => {
@@ -106,7 +107,7 @@ const App = () => {
     return res.ok;
   };
 
-  const onSubmitWord = async () => {
+  const submitWord = async () => {
     const sanitizedInputWord = inputWord?.trim().toLocaleLowerCase();
     if (!(sanitizedInputWord?.length)) {
       alert("No word entered");
@@ -142,6 +143,7 @@ const App = () => {
       setInputWord('');
       if (inputWord === puzzle.destination_word) {
         setGameFinished(true);
+        setShowWinModal(true);
       }
       return a;
     });
@@ -150,6 +152,19 @@ const App = () => {
   const resetTo = (index) => {
     setLinkWords((prev) => prev.slice(0, index));
     setGameFinished(false);
+  }
+
+  const share = async () => {
+    try {
+      await navigator.share({
+        title: '⛓️ Chain Letters 🔡',
+        url: window.location,
+        text: `⛓️ Chain Letters 🔡\n${dateString}\n${puzzle.source_word}=>${puzzle.destination_word}\n\n${linkWords.length} links`
+      });
+    } catch (err) {
+      console.error(err);
+      alert('Your browser doesn\'t support sharing. Screenshot, I guess?');
+    }
   }
 
   return (<Container fluid className='app-container'>
@@ -188,20 +203,45 @@ const App = () => {
               className="m-0 border-0"
               value={inputWord}
               placeholder="Next word..."
-              onKeyUp={(e) => { if (e.code === 'Enter') { onSubmitWord(); } }}
+              onKeyUp={(e) => { if (e.code === 'Enter') { submitWord(); } }}
               onChange={(e) => { setInputWord(e.target.value) }}
             />
             <Button
               variant="primary"
               size="sm"
               className="ms-auto"
-              onClick={onSubmitWord}
+              onClick={submitWord}
             ><i class="fa-solid fa-plus"></i></Button>
           </ListGroup.Item>
         )}
       </ListGroup>
     </Card>
-  </Container >);
+    <Modal show={showWinModal} fullscreen="sm-down" onHide={() => setShowWinModal(false)}>
+      <Modal.Header closeButton>
+        <Modal.Title>🎉 You won!</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <p>
+          You chained <span className="text-primary px-1">{puzzle.source_word}</span>
+          to <span className="text-success px-1">{puzzle.destination_word}</span>
+          using <strong>{linkWords.length}</strong> links.
+        </p>
+        {(navigator.canShare ? (<>
+          <p>Share your results with your friends!</p>
+          <div className="d-grid gap-2">
+            <Button variant="success" size="lg" onClick={share}>
+              <i class="fa-solid fa-share-nodes"></i> Share
+            </Button>
+          </div>
+        </>) : (<></>))}
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={() => setShowWinModal(false)}>
+          Back to game
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  </Container>);
 };
 
 export default App;
