@@ -32,7 +32,7 @@ const App = () => {
     const load = async () => {
       const newDateString = getShortDateString(new Date());
       setDateString(newDateString);
-      const puzzlePath = `./puzzles/${newDateString}.json`;
+      const puzzlePath = `${window.location}/puzzles/${newDateString}.json`;
       const res = await fetch(puzzlePath);
       const responsePuzzle = await res.json();
       setPuzzle(responsePuzzle);
