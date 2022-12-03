@@ -5,7 +5,6 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Badge from 'react-bootstrap/Badge';
 import Modal from 'react-bootstrap/Modal';
 
 const ALPHA_REGEX = /^[a-z]+$/i;
@@ -186,7 +185,7 @@ const App = () => {
           const isWinningWord = (gameFinished && index === linkWords.length - 1);
           return (
             <ListGroup.Item key={linkWord} variant={isWinningWord ? "success" : ""} className="d-flex">
-              <Badge bg="secondary" className="me-2">{index + 1}</Badge>
+              <div className="me-2 text-secondary"><strong>{index + 1}</strong></div>
               <div className="word-box">{linkWord}</div>
               <Button
                 variant="warning"
