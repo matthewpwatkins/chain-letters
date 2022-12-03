@@ -11,7 +11,7 @@ const setLocalStorage = (key, value) => {
   window.localStorage.setItem(fullKey, JSON.stringify(value));
 }
 
-exports.getPuzzleDefinition = async (id) => {
+export const getPuzzleDefinition = async (id) => {
   const puzzlePath = `${window.location}/puzzle-definitions/${id}.json`;
   const res = await fetch(puzzlePath);
   const puzzleDefinition = await res.json();
@@ -21,7 +21,7 @@ exports.getPuzzleDefinition = async (id) => {
   };
 };
 
-exports.getUserPuzzle = async (id) => {
+export const getUserPuzzle = async (id) => {
   let userPuzzle = readLocalStorage(`puzzles.${id}`);
   if (userPuzzle) {
     return userPuzzle;
@@ -33,6 +33,6 @@ exports.getUserPuzzle = async (id) => {
   };
 };
 
-exports.storeUserPuzzle = (userPuzzle) => {
+export const storeUserPuzzle = (userPuzzle) => {
   setLocalStorage(`puzzles.${userPuzzle.definition.id}`, userPuzzle);
 };
