@@ -170,7 +170,7 @@ const App = () => {
         {linkWords.map((linkWord, index) => {
           const isWinningWord = (gameFinished && index === linkWords.length - 1);
           return (
-            <ListGroup.Item key={linkWord} variant={isWinningWord ? "success" : ""} className="p-1 d-flex">
+            <ListGroup.Item key={linkWord} variant={isWinningWord ? "success" : ""} className="d-flex">
               <Badge bg="secondary" className="me-2">{index + 1}</Badge>
               <div className="word-box">{linkWord}</div>
               <Button
@@ -178,12 +178,12 @@ const App = () => {
                 size="sm"
                 className="ms-auto"
                 onClick={() => resetTo(index)}
-              ><i class="fa-solid fa-clock-rotate-left"></i> </Button>
+              ><i class="fa-solid fa-clock-rotate-left"></i></Button>
             </ListGroup.Item>
           );
         })}
-        {(gameFinished ? (<></>) : <ListGroup.Item className="p-0 border-0">
-          <InputGroup>
+        {(gameFinished ? (<></>) :
+          <ListGroup.Item className="d-flex">
             <Form.Control
               className="m-0 border-0"
               value={inputWord}
@@ -193,11 +193,12 @@ const App = () => {
             />
             <Button
               variant="primary"
-              className="rounded-0"
+              size="sm"
+              className="ms-auto"
               onClick={onSubmitWord}
             ><i class="fa-solid fa-plus"></i></Button>
-          </InputGroup>
-        </ListGroup.Item>)}
+          </ListGroup.Item>
+        )}
       </ListGroup>
     </Card>
   </Container >);
