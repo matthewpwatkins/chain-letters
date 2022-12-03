@@ -156,7 +156,7 @@ const App = () => {
     </p>
     <Card border="primary" className="my-3">
       <ListGroup variant="flush">
-        <ListGroup.Item variant="primary">
+        <ListGroup.Item variant="primary" className="text-center">
           <span className="word-box">{puzzle.source_word}
             &nbsp;<i className="fa-solid fa-arrow-right"></i>&nbsp;
             {puzzle.destination_word}
