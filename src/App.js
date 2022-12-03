@@ -6,15 +6,18 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import { getUserPuzzle, storeUserPuzzle } from './StorageManager';
 
 const ALPHA_REGEX = /^[a-z]+$/i;
 
 const App = () => {
-  const [dateString, setDateString] = useState('');
+  const [userPuzzle, setUserPuzzle] = useState('');
+  const [activeLevel, setActiveLevel] = useState('easy');
+  const [activeLevelDefinition, setActiveLevelDefinition] = useState({});
+  const [activeLevelAttempt, setActiveLevelAttempt] = useState({});
+  const [activeLevelAttemptLinkWords, setActiveLevelAttemptLinkWords] = useState([]);
   const [inputWord, setInputWord] = useState('');
-  const [linkWords, setLinkWords] = useState([]);
   const [gameFinished, setGameFinished] = useState(false);
-  const [puzzle, setPuzzle] = useState({});
   const [showWinModal, setShowWinModal] = useState(false);
 
   useEffect(() => {
@@ -30,12 +33,27 @@ const App = () => {
     };
 
     const load = async () => {
-      const newDateString = getShortDateString(new Date());
-      setDateString(newDateString);
-      const puzzlePath = `${window.location}/puzzles/${newDateString}.json`;
-      const res = await fetch(puzzlePath);
-      const responsePuzzle = await res.json();
-      setPuzzle(responsePuzzle);
+      const mUserPuzzle = await getUserPuzzle(getShortDateString(new Date()));
+      const mActiveLevel = mUserPuzzle.attempt.last_attempted_level || 'easy';
+      const mActiveLevelDefinition = mUserPuzzle.definition[mActiveLevel];
+      const mActiveLevelAttempt = mUserPuzzle.attempt[mActiveLevel] || {};
+      mActiveLevelAttempt.link_words = mActiveLevelAttempt.link_words || [];
+
+      console.log('mUserPuzzle', mUserPuzzle);
+      console.log('mActiveLevel', mActiveLevel);
+      console.log('mActiveLevelDefinition', mActiveLevelDefinition);
+      console.log('mActiveLevelAttempt', mActiveLevelAttempt);
+
+      setUserPuzzle(mUserPuzzle);
+      setActiveLevel(mActiveLevel);
+      setActiveLevelDefinition(mActiveLevelDefinition);
+      setActiveLevelAttempt(mActiveLevelAttempt);
+      setActiveLevelAttemptLinkWords(mActiveLevelAttempt.link_words);
+
+      console.log('userPuzzle', userPuzzle);
+      console.log('activeLevel', activeLevel);
+      console.log('activeLevelDefinition', activeLevelDefinition);
+      console.log('activeLevelAttempt', activeLevelAttempt);
     };
     load();
   }, []);
@@ -118,13 +136,13 @@ const App = () => {
       return;
     }
 
-    if (sanitizedInputWord === puzzle.source_word || linkWords.includes(inputWord)) {
+    if (sanitizedInputWord === activeLevelDefinition.source_word || activeLevelAttemptLinkWords.includes(sanitizedInputWord)) {
       alert("No word reuse");
       return;
     }
 
-    const previousWord = linkWords.length
-      ? linkWords[linkWords.length - 1] : puzzle.source_word;
+    const previousWord = activeLevelAttemptLinkWords.length
+      ? activeLevelAttemptLinkWords[activeLevelAttemptLinkWords.length - 1] : activeLevelDefinition.source_word;
 
     if (!wordsAreCloseEnough(previousWord, sanitizedInputWord)) {
       alert("Not close enough");
@@ -136,21 +154,42 @@ const App = () => {
       return;
     }
 
-    setLinkWords(l => {
-      const a = [...l];
-      a.push(sanitizedInputWord);
-      setInputWord('');
-      if (sanitizedInputWord === puzzle.destination_word) {
+    setActiveLevelAttemptLinkWords(w => {
+      w.push(sanitizedInputWord);
+      setActiveLevelAttempt(a => {
+        a.link_words = w;
+        setUserPuzzle(up => {
+          up.attempt[activeLevel] = a;
+          storeUserPuzzle(up);
+          return up;
+        });
+        return a;
+      });
+      setInputWord("");
+      if (sanitizedInputWord === activeLevelDefinition.destination_word) {
         setGameFinished(true);
         setShowWinModal(true);
       }
-      return a;
+      return w;
     });
   }
 
   const resetTo = (index) => {
-    setLinkWords((prev) => prev.slice(0, index));
-    setGameFinished(false);
+    setActiveLevelAttemptLinkWords(w => {
+      w = w.slice(0, index);
+      setActiveLevelAttempt(a => {
+        a.link_words = w;
+        setUserPuzzle(up => {
+          up.attempt[activeLevel] = a;
+          storeUserPuzzle(up);
+          return up;
+        });
+        return a;
+      });
+      setInputWord("");
+      setGameFinished(false);
+      return w;
+    })
   }
 
   const share = async () => {
@@ -158,7 +197,7 @@ const App = () => {
       await navigator.share({
         title: '⛓️ Chain Letters 🔡',
         url: window.location,
-        text: `⛓️ Chain Letters 🔡\n${dateString}\n${puzzle.source_word}=>${puzzle.destination_word}\n\n${linkWords.length} links`
+        text: `⛓️ Chain Letters 🔡\n${userPuzzle.definition.id}\n${activeLevelDefinition.source_word}=>${activeLevelDefinition.destination_word}\n\n${activeLevelAttemptLinkWords.length} links`
       });
     } catch (err) {
       console.error(err);
@@ -166,23 +205,23 @@ const App = () => {
     }
   }
 
-  return (<Container fluid className='app-container'>
+  return (userPuzzle ? (<Container fluid className='app-container'>
     <h1 className="display-5 my-3 text-center">⛓️ Chain Letters 🔡</h1>
     <p className="lead text-center">
       <span>&#x2014;</span>
-      <span className="mx-3">{dateString}</span>
+      <span className="mx-3">{userPuzzle.definition.id}</span>
       <span>&#x2014;</span>
     </p>
     <Card border="primary" className="my-3">
       <ListGroup variant="flush">
         <ListGroup.Item variant="primary" className="text-center">
-          <span className="link-word">{puzzle.source_word}
+          <span className="link-word">{activeLevelDefinition.source_word}
             <i className="fa-solid fa-arrow-right mx-2"></i>
-            {puzzle.destination_word}
+            {activeLevelDefinition.destination_word}
           </span>
         </ListGroup.Item>
-        {linkWords.map((linkWord, index) => {
-          const isWinningWord = (gameFinished && index === linkWords.length - 1);
+        {activeLevelAttemptLinkWords.map((linkWord, index) => {
+          const isWinningWord = (gameFinished && index === activeLevelAttemptLinkWords.length - 1);
           return (
             <ListGroup.Item key={linkWord} variant={isWinningWord ? "success" : ""} className="d-flex">
               <div className="me-2 text-secondary"><strong>{index + 1}</strong></div>
@@ -228,9 +267,9 @@ const App = () => {
       </Modal.Header>
       <Modal.Body>
         <p>
-          You chained <span className="link-word text-primary px-1">{puzzle.source_word}</span>
-          &rarr; <span className="link-word text-success px-1">{puzzle.destination_word}</span>
-          using <strong>{linkWords.length}</strong> links.
+          You chained <span className="link-word text-primary px-1">{activeLevelDefinition.source_word}</span>
+          &rarr; <span className="link-word text-success px-1">{activeLevelDefinition.destination_word}</span>
+          using <strong>{activeLevelAttemptLinkWords.length}</strong> links.
         </p>
         {(navigator.canShare ? (<>
           <p>Share your results with your friends!</p>
@@ -247,7 +286,7 @@ const App = () => {
         </Button>
       </Modal.Footer>
     </Modal>
-  </Container>);
+  </Container>) : (<></>));
 };
 
 export default App;
