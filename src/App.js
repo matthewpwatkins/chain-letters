@@ -177,7 +177,7 @@ const App = () => {
       <ListGroup variant="flush">
         <ListGroup.Item variant="primary" className="text-center">
           <span className="link-word">{puzzle.source_word}
-            &nbsp;<i className="fa-solid fa-arrow-right"></i>&nbsp;
+            <i className="fa-solid fa-arrow-right mx-2"></i>
             {puzzle.destination_word}
           </span>
         </ListGroup.Item>
