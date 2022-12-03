@@ -10,27 +10,28 @@ const App = () => {
   const [gameFinished, setGameFinished] = useState(false);
   const [puzzle, setPuzzle] = useState({});
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    const lPadZeroNumber = (number, length) => {
+      return (number + "").padStart(length, "0");
+    };
 
-  const load = async () => {
-    const newDateString = getShortDateString(new Date());
-    setDateString(newDateString);
-    const puzzlePath = `${process.env.PUBLIC_URL}/puzzles/${newDateString}.json`;
-    const res = await fetch(puzzlePath);
-    const responsePuzzle = await res.json();
-    setPuzzle(responsePuzzle);
-  };
+    const getShortDateString = (date) => {
+      const year = lPadZeroNumber(date.getFullYear(), 4);
+      const month = lPadZeroNumber(date.getMonth() + 1, 2);
+      const dayOfMonth = lPadZeroNumber(date.getDate(), 2);
+      return `${year}-${month}-${dayOfMonth}`;
+    };
 
-  const lPadZeroNumber = (number, length) => {
-    return (number + "").padStart(length, "0");
-  };
-
-  const getShortDateString = (date) => {
-    const year = lPadZeroNumber(date.getFullYear(), 4);
-    const month = lPadZeroNumber(date.getMonth() + 1, 2);
-    const dayOfMonth = lPadZeroNumber(date.getDate(), 2);
-    return `${year}-${month}-${dayOfMonth}`;
-  };
+    const load = async () => {
+      const newDateString = getShortDateString(new Date());
+      setDateString(newDateString);
+      const puzzlePath = `${process.env.PUBLIC_URL}/puzzles/${newDateString}.json`;
+      const res = await fetch(puzzlePath);
+      const responsePuzzle = await res.json();
+      setPuzzle(responsePuzzle);
+    };
+    load();
+  }, []);
 
   // https://www.tutorialspoint.com/levenshtein-distance-in-javascript
   const getLevenshteinDistance = (a, b) => {
