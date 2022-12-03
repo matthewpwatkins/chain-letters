@@ -176,7 +176,7 @@ const App = () => {
     <Card border="primary" className="my-3">
       <ListGroup variant="flush">
         <ListGroup.Item variant="primary" className="text-center">
-          <span className="word-box">{puzzle.source_word}
+          <span className="link-word">{puzzle.source_word}
             &nbsp;<i className="fa-solid fa-arrow-right"></i>&nbsp;
             {puzzle.destination_word}
           </span>
@@ -186,7 +186,7 @@ const App = () => {
           return (
             <ListGroup.Item key={linkWord} variant={isWinningWord ? "success" : ""} className="d-flex">
               <div className="me-2 text-secondary"><strong>{index + 1}</strong></div>
-              <div className="word-box">{linkWord}</div>
+              <div className="link-word">{linkWord}</div>
               <Button
                 variant="warning"
                 size="sm"
@@ -228,8 +228,8 @@ const App = () => {
       </Modal.Header>
       <Modal.Body>
         <p>
-          You chained <span className="text-primary px-1">{puzzle.source_word}</span>
-          to <span className="text-success px-1">{puzzle.destination_word}</span>
+          You chained <span className="link-word text-primary px-1">{puzzle.source_word}</span>
+          &rarr; <span className="link-word text-success px-1">{puzzle.destination_word}</span>
           using <strong>{linkWords.length}</strong> links.
         </p>
         {(navigator.canShare ? (<>
