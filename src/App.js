@@ -147,6 +147,11 @@ const App = () => {
     });
   }
 
+  const resetTo = (index) => {
+    setLinkWords((prev) => prev.slice(0, index));
+    setGameFinished(false);
+  }
+
   return (<Container fluid className='app-container'>
     <h1 className="display-5 my-3 text-center">⛓️ Chain Letters 🔡</h1>
     <p className="lead text-center">
@@ -165,9 +170,15 @@ const App = () => {
         {linkWords.map((linkWord, index) => {
           const isWinningWord = (gameFinished && index === linkWords.length - 1);
           return (
-            <ListGroup.Item key={linkWord} variant={isWinningWord ? "success" : ""} className="p-1">
+            <ListGroup.Item key={linkWord} variant={isWinningWord ? "success" : ""} className="p-1 d-flex">
               <Badge bg="secondary" className="me-2">{index + 1}</Badge>
-              <span className="word-box">{linkWord}</span>
+              <div className="word-box">{linkWord}</div>
+              <Button
+                variant="warning"
+                size="sm"
+                className="ms-auto"
+                onClick={() => resetTo(index)}
+              ><i class="fa-solid fa-clock-rotate-left"></i> </Button>
             </ListGroup.Item>
           );
         })}
