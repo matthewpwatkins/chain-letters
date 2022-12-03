@@ -192,7 +192,7 @@ const App = () => {
                 size="sm"
                 className="ms-auto"
                 onClick={() => resetTo(index)}
-              ><i class="fa-solid fa-clock-rotate-left"></i></Button>
+              ><i className="fa-solid fa-clock-rotate-left"></i></Button>
             </ListGroup.Item>
           );
         })}
@@ -210,7 +210,7 @@ const App = () => {
               size="sm"
               className="ms-auto"
               onClick={submitWord}
-            ><i class="fa-solid fa-plus"></i></Button>
+            ><i className="fa-solid fa-plus"></i></Button>
           </ListGroup.Item>
         )}
       </ListGroup>
@@ -218,7 +218,7 @@ const App = () => {
 
     {(gameFinished ? (<div className="d-grid gap-2">
       <Button variant="success" size="lg" onClick={share}>
-        <i class="fa-solid fa-share-nodes"></i> Share
+        <i className="fa-solid fa-share-nodes"></i> Share
       </Button>
     </div>) : (<></>))}
 
@@ -236,7 +236,7 @@ const App = () => {
           <p>Share your results with your friends!</p>
           <div className="d-grid gap-2">
             <Button variant="success" size="lg" onClick={share}>
-              <i class="fa-solid fa-share-nodes"></i> Share
+              <i className="fa-solid fa-share-nodes"></i> Share
             </Button>
           </div>
         </>) : (<></>))}
