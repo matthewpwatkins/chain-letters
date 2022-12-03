@@ -1,5 +1,12 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Form from 'react-bootstrap/Form';
+import Badge from 'react-bootstrap/Badge';
 
 const ALPHA_REGEX = /^[a-z]+$/i;
 
@@ -140,58 +147,49 @@ const App = () => {
     });
   }
 
-  return (<div className='container-fluid app-container'>
+  return (<Container fluid className='app-container'>
     <h1 className="display-5 my-3 text-center">⛓️ Chain Letters 🔡</h1>
     <p className="lead text-center">
       <span>&#x2014;</span>
       <span className="mx-3">{dateString}</span>
       <span>&#x2014;</span>
     </p>
-    <div className="card my-3">
-      <ul className="list-group list-group-flush">
-        <li className="list-group-item bg-primary text-light">
+    <Card border="primary" className="my-3">
+      <ListGroup variant="flush">
+        <ListGroup.Item variant="primary">
           <span className="word-box">{puzzle.source_word}
             &nbsp;<i className="fa-solid fa-arrow-right"></i>&nbsp;
             {puzzle.destination_word}
           </span>
-        </li>
+        </ListGroup.Item>
         {linkWords.map((linkWord, index) => {
-          let liClassName = "list-group-item p-1";
-          let indexClassName = "badge me-2";
-          if (gameFinished && index === linkWords.length - 1) {
-            liClassName += " bg-success text-light";
-            indexClassName += " text-bg-light";
-          } else {
-            indexClassName += " text-bg-secondary";
-          }
-
+          const isWinningWord = (gameFinished && index === linkWords.length - 1);
           return (
-            <li key={linkWord} className={liClassName}>
-              <span className={indexClassName}>{index + 1}</span>
+            <ListGroup.Item key={linkWord} variant={isWinningWord ? "success" : ""} className="p-1">
+              <Badge bg="secondary" className="me-2">{index + 1}</Badge>
               <span className="word-box">{linkWord}</span>
-            </li>
+            </ListGroup.Item>
           );
         })}
-        {(gameFinished ? (<></>) : <li className="list-group-item p-0 border-0">
-          <div className="input-group">
-            <input
-              type="text"
-              className="form-control m-0 border-0"
+        {(gameFinished ? (<></>) : <ListGroup.Item className="p-0 border-0">
+          <InputGroup>
+            <Form.Control
+              className="m-0 border-0"
               value={inputWord}
               placeholder="Next word..."
               onKeyUp={(e) => { if (e.code === 'Enter') { onSubmitWord(); } }}
               onChange={(e) => { setInputWord(e.target.value) }}
             />
-            <button
-              type="button"
-              className="btn btn-info border-0"
-              style={{ borderRadius: 0 }}
-              onClick={onSubmitWord}>Add</button>
-          </div>
-        </li>)}
-      </ul>
-    </div>
-  </div >);
+            <Button
+              variant="primary"
+              className="rounded-0"
+              onClick={onSubmitWord}
+            ><i class="fa-solid fa-plus"></i></Button>
+          </InputGroup>
+        </ListGroup.Item>)}
+      </ListGroup>
+    </Card>
+  </Container >);
 };
 
 export default App;
