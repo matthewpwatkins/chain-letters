@@ -130,6 +130,23 @@ const App = () => {
     }
   }
 
+  const PuzzleHeader = (props) => <>
+    <h1 className="display-5 my-3 text-center">⛓️ Chain Letters 🔡</h1>
+    <p className="lead text-center">
+      <span>&#x2014;</span>
+      <span className="mx-3">{props.puzzleID}</span>
+      <span>&#x2014;</span>
+    </p>
+  </>;
+
+  const DefinitionRow = (props) => <ListGroup.Item variant="primary" className="text-center">
+    <span className="link-word">
+      {props.sourceWord}
+      <i className="fa-solid fa-arrow-right mx-2"></i>
+      {props.destinationWord}
+    </span>
+  </ListGroup.Item>;
+
   const LinkWordRow = (props) => <ListGroup.Item key={props.word} variant={props.isWinningWord ? "success" : ""} className="d-flex">
     <div className="me-2 text-secondary"><strong>{props.index + 1}</strong></div>
     <div className="link-word">{props.word}</div>
@@ -141,25 +158,14 @@ const App = () => {
     ><i className="fa-solid fa-clock-rotate-left"></i></Button>
   </ListGroup.Item>;
 
-  const PuzzleHeader = (props) => <>
-    <h1 className="display-5 my-3 text-center">⛓️ Chain Letters 🔡</h1>
-    <p className="lead text-center">
-      <span>&#x2014;</span>
-      <span className="mx-3">{props.puzzleID}</span>
-      <span>&#x2014;</span>
-    </p>
-  </>;
-
   return (userPuzzle ? (<Container fluid className='app-container'>
     <PuzzleHeader puzzleID={userPuzzle.definition.id} />
     <Card border="primary" className="my-3">
       <ListGroup variant="flush">
-        <ListGroup.Item variant="primary" className="text-center">
-          <span className="link-word">{activeLevelDefinition.source_word}
-            <i className="fa-solid fa-arrow-right mx-2"></i>
-            {activeLevelDefinition.destination_word}
-          </span>
-        </ListGroup.Item>
+        <DefinitionRow
+          sourceWord={activeLevelDefinition.source_word}
+          destinationWord={activeLevelDefinition.destination_word}
+        />
         {activeLevelAttemptLinkWords.map((linkWord, index) => {
           return <LinkWordRow
             index={index}
