@@ -147,7 +147,7 @@ const App = () => {
     </span>
   </ListGroup.Item>;
 
-  const LinkWordRow = (props) => <ListGroup.Item key={props.word} variant={props.isWinningWord ? "success" : ""} className="d-flex">
+  const LinkWordRow = (props) => <ListGroup.Item variant={props.isWinningWord ? "success" : ""} className="d-flex">
     <div className="me-2 text-secondary"><strong>{props.index + 1}</strong></div>
     <div className="link-word">{props.word}</div>
     <Button
@@ -158,6 +158,32 @@ const App = () => {
     ><i className="fa-solid fa-clock-rotate-left"></i></Button>
   </ListGroup.Item>;
 
+  const WinModal = (props) => <Modal show={props.show} fullscreen="sm-down" centered onHide={() => setShowWinModal(false)}>
+    <Modal.Header closeButton>
+      <Modal.Title>🎉 You won!</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <p>
+        You chained <span className="link-word text-primary px-1">{props.sourceWord}</span>
+        &rarr; <span className="link-word text-success px-1">{props.destinationWord}</span>
+        using <strong>{props.chainLength}</strong> links.
+      </p>
+      {(navigator.canShare ? (<>
+        <p>Share your results with your friends!</p>
+        <div className="d-grid gap-2">
+          <Button variant="success" size="lg" onClick={share}>
+            <i className="fa-solid fa-share-nodes"></i> Share
+          </Button>
+        </div>
+      </>) : (<></>))}
+    </Modal.Body>
+    <Modal.Footer>
+      <Button variant="secondary" onClick={() => setShowWinModal(false)}>
+        Back to game
+      </Button>
+    </Modal.Footer>
+  </Modal>;
+
   return (userPuzzle ? (<Container fluid className='app-container'>
     <PuzzleHeader puzzleID={userPuzzle.definition.id} />
     <Card border="primary" className="my-3">
@@ -166,13 +192,12 @@ const App = () => {
           sourceWord={activeLevelDefinition.source_word}
           destinationWord={activeLevelDefinition.destination_word}
         />
-        {activeLevelAttemptLinkWords.map((linkWord, index) => {
-          return <LinkWordRow
-            index={index}
-            word={linkWord}
-            isWinningWord={gameFinished && index === activeLevelAttemptLinkWords.length - 1}
-          />;
-        })}
+        {activeLevelAttemptLinkWords.map((linkWord, index) => <LinkWordRow
+          key={linkWord}
+          index={index}
+          word={linkWord}
+          isWinningWord={gameFinished && index === activeLevelAttemptLinkWords.length - 1}
+        />)}
         {(gameFinished ? (<></>) :
           <ListGroup.Item className="d-flex">
             <Form.Control
@@ -199,31 +224,12 @@ const App = () => {
       </Button>
     </div>) : (<></>))}
 
-    <Modal show={showWinModal} fullscreen="sm-down" centered onHide={() => setShowWinModal(false)}>
-      <Modal.Header closeButton>
-        <Modal.Title>🎉 You won!</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <p>
-          You chained <span className="link-word text-primary px-1">{activeLevelDefinition.source_word}</span>
-          &rarr; <span className="link-word text-success px-1">{activeLevelDefinition.destination_word}</span>
-          using <strong>{activeLevelAttemptLinkWords.length}</strong> links.
-        </p>
-        {(navigator.canShare ? (<>
-          <p>Share your results with your friends!</p>
-          <div className="d-grid gap-2">
-            <Button variant="success" size="lg" onClick={share}>
-              <i className="fa-solid fa-share-nodes"></i> Share
-            </Button>
-          </div>
-        </>) : (<></>))}
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={() => setShowWinModal(false)}>
-          Back to game
-        </Button>
-      </Modal.Footer>
-    </Modal>
+    <WinModal
+      show={showWinModal}
+      sourceWord={activeLevelDefinition.source_word}
+      destinationWord={activeLevelDefinition.destination_word}
+      chainLength={activeLevelAttemptLinkWords.length}
+    />
   </Container>) : (<></>));
 };
 
