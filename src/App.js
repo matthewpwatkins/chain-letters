@@ -49,6 +49,7 @@ const App = () => {
       setActiveLevel(mActiveLevel);
       setActiveLevelDefinition(mActiveLevelDefinition);
       setActiveLevelAttemptLinkWords(mActiveLevelAttempt.link_words);
+      setGameFinished(mActiveLevelAttempt.link_words.length && mActiveLevelAttempt.link_words[mActiveLevelAttempt.link_words.length - 1] === mActiveLevelDefinition.destination_word);
     };
     load();
   }, []);
@@ -158,6 +159,12 @@ const App = () => {
     ><i className="fa-solid fa-clock-rotate-left"></i></Button>
   </ListGroup.Item>;
 
+  const ShareButton = () => <div className="d-grid gap-2">
+    <Button variant="success" size="lg" onClick={share}>
+      <i className="fa-solid fa-share-nodes"></i> Share
+    </Button>
+  </div>
+
   const WinModal = (props) => <Modal show={props.show} fullscreen="sm-down" centered onHide={() => setShowWinModal(false)}>
     <Modal.Header closeButton>
       <Modal.Title>🎉 You won!</Modal.Title>
@@ -170,11 +177,7 @@ const App = () => {
       </p>
       {(navigator.canShare ? (<>
         <p>Share your results with your friends!</p>
-        <div className="d-grid gap-2">
-          <Button variant="success" size="lg" onClick={share}>
-            <i className="fa-solid fa-share-nodes"></i> Share
-          </Button>
-        </div>
+        <ShareButton />
       </>) : (<></>))}
     </Modal.Body>
     <Modal.Footer>
@@ -218,11 +221,7 @@ const App = () => {
       </ListGroup>
     </Card>
 
-    {(gameFinished ? (<div className="d-grid gap-2">
-      <Button variant="success" size="lg" onClick={share}>
-        <i className="fa-solid fa-share-nodes"></i> Share
-      </Button>
-    </div>) : (<></>))}
+    {(gameFinished ? (<ShareButton />) : <></>)}
 
     <WinModal
       show={showWinModal}
