@@ -101,7 +101,7 @@ const App = () => {
     });
   }
 
-  const resetTo = (index) => {
+  const revert = (index) => {
     setActiveLevelAttemptLinkWords(w => {
       w = w.slice(0, index);
       setUserPuzzle(up => {
@@ -130,6 +130,17 @@ const App = () => {
     }
   }
 
+  const LinkWordRow = (props) => <ListGroup.Item key={props.word} variant={props.isWinningWord ? "success" : ""} className="d-flex">
+    <div className="me-2 text-secondary"><strong>{props.index + 1}</strong></div>
+    <div className="link-word">{props.word}</div>
+    <Button
+      variant="warning"
+      size="sm"
+      className="ms-auto"
+      onClick={() => revert(props.index)}
+    ><i className="fa-solid fa-clock-rotate-left"></i></Button>
+  </ListGroup.Item>;
+
   return (userPuzzle ? (<Container fluid className='app-container'>
     <h1 className="display-5 my-3 text-center">⛓️ Chain Letters 🔡</h1>
     <p className="lead text-center">
@@ -146,19 +157,11 @@ const App = () => {
           </span>
         </ListGroup.Item>
         {activeLevelAttemptLinkWords.map((linkWord, index) => {
-          const isWinningWord = (gameFinished && index === activeLevelAttemptLinkWords.length - 1);
-          return (
-            <ListGroup.Item key={linkWord} variant={isWinningWord ? "success" : ""} className="d-flex">
-              <div className="me-2 text-secondary"><strong>{index + 1}</strong></div>
-              <div className="link-word">{linkWord}</div>
-              <Button
-                variant="warning"
-                size="sm"
-                className="ms-auto"
-                onClick={() => resetTo(index)}
-              ><i className="fa-solid fa-clock-rotate-left"></i></Button>
-            </ListGroup.Item>
-          );
+          return <LinkWordRow
+            index={index}
+            word={linkWord}
+            isWinningWord={gameFinished && index === activeLevelAttemptLinkWords.length - 1}
+          />;
         })}
         {(gameFinished ? (<></>) :
           <ListGroup.Item className="d-flex">
