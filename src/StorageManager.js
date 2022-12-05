@@ -28,7 +28,7 @@ export const getUserPuzzle = async (id) => {
   }
 
   return {
-    definition: await this.getPuzzleDefinition(id),
+    definition: await getPuzzleDefinition(id),
     attempt: {}
   };
 };
