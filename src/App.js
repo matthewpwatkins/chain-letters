@@ -14,7 +14,6 @@ const App = () => {
   const [userPuzzle, setUserPuzzle] = useState('');
   const [activeLevel, setActiveLevel] = useState('easy');
   const [activeLevelDefinition, setActiveLevelDefinition] = useState({});
-  const [activeLevelAttempt, setActiveLevelAttempt] = useState({});
   const [activeLevelAttemptLinkWords, setActiveLevelAttemptLinkWords] = useState([]);
   const [inputWord, setInputWord] = useState('');
   const [gameFinished, setGameFinished] = useState(false);
@@ -39,21 +38,10 @@ const App = () => {
       const mActiveLevelAttempt = mUserPuzzle.attempt[mActiveLevel] || {};
       mActiveLevelAttempt.link_words = mActiveLevelAttempt.link_words || [];
 
-      console.log('mUserPuzzle', mUserPuzzle);
-      console.log('mActiveLevel', mActiveLevel);
-      console.log('mActiveLevelDefinition', mActiveLevelDefinition);
-      console.log('mActiveLevelAttempt', mActiveLevelAttempt);
-
       setUserPuzzle(mUserPuzzle);
       setActiveLevel(mActiveLevel);
       setActiveLevelDefinition(mActiveLevelDefinition);
-      setActiveLevelAttempt(mActiveLevelAttempt);
       setActiveLevelAttemptLinkWords(mActiveLevelAttempt.link_words);
-
-      console.log('userPuzzle', userPuzzle);
-      console.log('activeLevel', activeLevel);
-      console.log('activeLevelDefinition', activeLevelDefinition);
-      console.log('activeLevelAttempt', activeLevelAttempt);
     };
     load();
   }, []);
@@ -156,14 +144,12 @@ const App = () => {
 
     setActiveLevelAttemptLinkWords(w => {
       w.push(sanitizedInputWord);
-      setActiveLevelAttempt(a => {
-        a.link_words = w;
-        setUserPuzzle(up => {
-          up.attempt[activeLevel] = a;
-          storeUserPuzzle(up);
-          return up;
-        });
-        return a;
+      setUserPuzzle(up => {
+        up.attempt[activeLevel] = {
+          link_words: w
+        };
+        storeUserPuzzle(up);
+        return up;
       });
       setInputWord("");
       if (sanitizedInputWord === activeLevelDefinition.destination_word) {
@@ -177,14 +163,12 @@ const App = () => {
   const resetTo = (index) => {
     setActiveLevelAttemptLinkWords(w => {
       w = w.slice(0, index);
-      setActiveLevelAttempt(a => {
-        a.link_words = w;
-        setUserPuzzle(up => {
-          up.attempt[activeLevel] = a;
-          storeUserPuzzle(up);
-          return up;
-        });
-        return a;
+      setUserPuzzle(up => {
+        up.attempt[activeLevel] = {
+          link_words: w
+        };
+        storeUserPuzzle(up);
+        return up;
       });
       setInputWord("");
       setGameFinished(false);
