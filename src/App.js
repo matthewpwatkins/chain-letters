@@ -3,6 +3,7 @@ import './App.css';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -16,6 +17,7 @@ const App = () => {
   const [inputWord, setInputWord] = useState('');
   const [gameFinished, setGameFinished] = useState(false);
   const [showWinModal, setShowWinModal] = useState(false);
+  const [addWordMessage, setAddWordMessage] = useState(undefined);
 
   // Core data element
   const [userPuzzle, setUserPuzzle] = useState('');
@@ -57,17 +59,16 @@ const App = () => {
   const submitWord = async () => {
     const sanitizedInputWord = inputWord?.trim().toLocaleLowerCase();
     if (!(sanitizedInputWord?.length)) {
-      alert("No word entered");
       return;
     }
 
     if (!ALPHA_REGEX.test(sanitizedInputWord)) {
-      alert("Please use A-Z only, please.");
+      setAddWordMessage("Only letters A-Z allowed");
       return;
     }
 
     if (sanitizedInputWord === activeLevelDefinition.source_word || activeLevelAttemptLinkWords.includes(sanitizedInputWord)) {
-      alert("No word reuse");
+      setAddWordMessage("That word has already been used in the puzzle");
       return;
     }
 
@@ -75,12 +76,12 @@ const App = () => {
       ? activeLevelAttemptLinkWords[activeLevelAttemptLinkWords.length - 1] : activeLevelDefinition.source_word;
 
     if (!wordsAreCloseEnough(previousWord, sanitizedInputWord)) {
-      alert("Not close enough");
+      setAddWordMessage("That word is not close enough the previous word. Take a look at the rules again.");
       return;
     }
 
     if (!(await wordExists(sanitizedInputWord))) {
-      alert("Word doesn't exist");
+      setAddWordMessage("That word doesn't exist in the game dictionary.");
       return;
     }
 
@@ -98,6 +99,7 @@ const App = () => {
         setGameFinished(true);
         setShowWinModal(true);
       }
+      setAddWordMessage(undefined);
       return w;
     });
   }
@@ -202,20 +204,27 @@ const App = () => {
           isWinningWord={gameFinished && index === activeLevelAttemptLinkWords.length - 1}
         />)}
         {(gameFinished ? (<></>) :
-          <ListGroup.Item className="d-flex">
-            <Form.Control
-              className="m-0 border-0"
-              value={inputWord}
-              placeholder="Next word..."
-              onKeyUp={(e) => { if (e.code === 'Enter') { submitWord(); } }}
-              onChange={(e) => { setInputWord(e.target.value) }}
-            />
-            <Button
-              variant="primary"
-              size="sm"
-              className="ms-auto"
-              onClick={submitWord}
-            ><i className="fa-solid fa-plus"></i></Button>
+          <ListGroup.Item>
+            <div className="d-flex gap-2">
+              <Form.Control
+                className="m-0"
+                value={inputWord}
+                placeholder="Next word..."
+                onKeyUp={(e) => { if (e.code === 'Enter') { submitWord(); } }}
+                onChange={(e) => { setInputWord(e.target.value) }}
+              />
+              <Button
+                variant="primary"
+                size="sm"
+                className="ms-auto"
+                onClick={submitWord}
+              >
+                <i className="fa-solid fa-plus"></i>
+              </Button>
+            </div>
+            {(addWordMessage ? <p className="mt-3 text-danger">
+              <strong>{addWordMessage.content}</strong>
+            </p> : <></>)}
           </ListGroup.Item>
         )}
       </ListGroup>
@@ -229,7 +238,7 @@ const App = () => {
       destinationWord={activeLevelDefinition.destination_word}
       chainLength={activeLevelAttemptLinkWords.length}
     />
-  </Container>) : (<></>));
+  </Container >) : (<></>));
 };
 
 export default App;
