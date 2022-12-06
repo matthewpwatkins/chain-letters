@@ -26,6 +26,9 @@ const isSingleLetterSwap = (a, b) => {
   if (a.length !== b.length) {
     return false;
   }
+  if (a === b) {
+    return false;
+  }
 
   const diffIndices = [];
   for (let i = 0; i < a.length; i++) {
@@ -43,7 +46,23 @@ const isSingleLetterSwap = (a, b) => {
     && b[diffIndices[0]] === a[diffIndices[1]];
 };
 
+const isShift = (a, b) => {
+  if (a.length !== b.length) {
+    return false;
+  }
+  if (a === b) {
+    return false;
+  }
+
+  return b === a.substring(1) + a[0]
+    || b === a[a.length - 1] + a.substring(0, a.length - 1);
+};
+
 export const wordsAreCloseEnough = (a, b) => {
+  if (isShift(a, b)) {
+    return true;
+  }
+
   const lDist = getLevenshteinDistance(a, b);
 
   if (lDist === 1) {
@@ -60,6 +79,6 @@ export const wordsAreCloseEnough = (a, b) => {
 };
 
 export const wordExists = async (word) => {
-  const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+  const res = await fetch(`https://todoclevernamehere.github.io/wordlist/words/${word}.json`);
   return res.ok;
 };
