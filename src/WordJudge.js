@@ -79,6 +79,6 @@ export const wordsAreCloseEnough = (a, b) => {
 };
 
 export const wordExists = async (word) => {
-  const res = await fetch(`https://todoclevernamehere.github.io/wordlist/words/${word}.json`);
+  const res = await fetch(`https://game-word-list.netlify.app/${word}.json`);
   return res.ok;
 };
