@@ -17,6 +17,7 @@ const App = () => {
   const [inputWord, setInputWord] = useState('');
   const [gameFinished, setGameFinished] = useState(false);
   const [showWinModal, setShowWinModal] = useState(false);
+  const [showHelpModal, setShowHelpModal] = useState(false);
   const [addWordMessage, setAddWordMessage] = useState(undefined);
   const [addWordInProgress, setAddWordInProgress] = useState(false);
 
@@ -152,13 +153,16 @@ const App = () => {
     </p>
   </>;
 
-  const DefinitionRow = (props) => <ListGroup.Item variant="primary" className="text-center">
-    <span className="link-word">
-      {props.sourceWord}
+  const DefinitionRow = (props) => <ListGroup.Item variant="primary" className="d-flex">
+    <div className="flex-grow-1 text-center">
+      <span className="link-word">{props.sourceWord}</span>
       <i className="fa-solid fa-arrow-right mx-2"></i>
-      {props.destinationWord}
+      <span className="link-word">{props.destinationWord}</span>
+    </div>
+    <span className="ms-auto me-2" style={{ cursor: "pointer" }} onClick={() => setShowHelpModal(true)}>
+      <i className="fa-regular fa-circle-question"></i>
     </span>
-  </ListGroup.Item>;
+  </ListGroup.Item >;
 
   const LinkWordRow = (props) => <ListGroup.Item variant={props.isWinningWord ? "success" : ""} className="d-flex">
     <div className="me-2 text-secondary"><strong>{props.index + 1}</strong></div>
@@ -218,6 +222,37 @@ const App = () => {
     </Modal.Footer>
   </Modal>;
 
+  const HelpModal = (props) => <Modal show={props.show} fullscreen="sm-down" centered onHide={() => setShowHelpModal(false)}>
+    <Modal.Header closeButton>
+      <Modal.Title><i className="fa-regular fa-circle-question"></i> How to play</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <p>
+        Create a chain of words from the starting word to the ending word.
+        In today's puzzle, you need to form a chain from <span className="link-word px-1">{props.sourceWord}</span>
+        to <span className="link-word px-1">{props.destinationWord}</span>. Each link in the chain must be a valid
+        word in the dictionary and must be a small change from the previous link.
+      </p>
+      <p>
+        There are a few types of changes you can apply from one link to another:
+        <ul>
+          <li>Remove a letter (ex. SLIT &rarr; SIT)</li>
+          <li>Add a letter (ex. SITE &rarr; SITE)</li>
+          <li>Replace a letter (ex. SITE &rarr; MITE)</li>
+          <li>Swap two letters (ex. MITE &rarr; TIME)</li>
+          <li>Move the first letter to the end (ex. RING &rarr; GRIN)</li>
+          <li>Move the last letter to the front (ex. KISS &rarr; SKIS)</li>
+        </ul>
+      </p>
+      <p>Good luck!</p>
+    </Modal.Body>
+    <Modal.Footer>
+      <Button variant="primary" onClick={() => setShowHelpModal(false)}>
+        Back to game
+      </Button>
+    </Modal.Footer>
+  </Modal>;
+
   return (userPuzzle ? (<Container fluid className='app-container'>
     <PuzzleHeader puzzleID={userPuzzle.definition.id} />
     <Card border="primary" className="my-3">
@@ -256,6 +291,12 @@ const App = () => {
 
     <WinModal
       show={showWinModal}
+      sourceWord={activeLevelDefinition.source_word}
+      destinationWord={activeLevelDefinition.destination_word}
+      chainLength={activeLevelAttemptLinkWords.length}
+    />
+    <HelpModal
+      show={showHelpModal}
       sourceWord={activeLevelDefinition.source_word}
       destinationWord={activeLevelDefinition.destination_word}
       chainLength={activeLevelAttemptLinkWords.length}
