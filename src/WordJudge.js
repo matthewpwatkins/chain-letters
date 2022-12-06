@@ -60,8 +60,6 @@ export const wordsAreCloseEnough = (a, b) => {
 };
 
 export const wordExists = async (word) => {
-  const res = await fetch(`https://rawcdn.rawgit.net/TodoCleverNameHere/wordlist/ca157289d58e040049c93e57e7f69e15e0da6e4d/words/${word}.json`, {
-    mode: "no-cors"
-  });
+  const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
   return res.ok;
 };
