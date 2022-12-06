@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { getUserPuzzle, storeUserPuzzle } from './StorageManager';
@@ -17,6 +18,7 @@ const App = () => {
   const [gameFinished, setGameFinished] = useState(false);
   const [showWinModal, setShowWinModal] = useState(false);
   const [addWordMessage, setAddWordMessage] = useState(undefined);
+  const [addWordInProgress, setAddWordInProgress] = useState(false);
 
   // Core data element
   const [userPuzzle, setUserPuzzle] = useState('');
@@ -55,51 +57,60 @@ const App = () => {
   }, []);
 
   const submitWord = async () => {
-    const sanitizedInputWord = inputWord?.trim().toLocaleLowerCase();
-    if (!(sanitizedInputWord?.length)) {
-      return;
-    }
-
-    if (!ALPHA_REGEX.test(sanitizedInputWord)) {
-      setAddWordMessage("Only letters A-Z allowed");
-      return;
-    }
-
-    if (sanitizedInputWord === activeLevelDefinition.source_word || activeLevelAttemptLinkWords.includes(sanitizedInputWord)) {
-      setAddWordMessage("That word has already been used in the puzzle");
-      return;
-    }
-
-    const previousWord = activeLevelAttemptLinkWords.length
-      ? activeLevelAttemptLinkWords[activeLevelAttemptLinkWords.length - 1] : activeLevelDefinition.source_word;
-
-    if (!wordsAreCloseEnough(previousWord, sanitizedInputWord)) {
-      setAddWordMessage("That word is not close enough the previous word. Take a look at the rules again.");
-      return;
-    }
-
-    if (!(await wordExists(sanitizedInputWord))) {
-      setAddWordMessage("That word doesn't exist in the game dictionary.");
-      return;
-    }
-
-    setActiveLevelAttemptLinkWords(w => {
-      w.push(sanitizedInputWord);
-      setUserPuzzle(up => {
-        up.attempt[activeLevel] = {
-          link_words: w
-        };
-        storeUserPuzzle(up);
-        return up;
-      });
-      setInputWord("");
-      if (sanitizedInputWord === activeLevelDefinition.destination_word) {
-        setGameFinished(true);
-        setShowWinModal(true);
+    const addWord = async () => {
+      const sanitizedInputWord = inputWord?.trim().toLocaleLowerCase();
+      if (!(sanitizedInputWord?.length)) {
+        return;
       }
-      setAddWordMessage(undefined);
-      return w;
-    });
+
+      if (!ALPHA_REGEX.test(sanitizedInputWord)) {
+        setAddWordMessage("Only letters A-Z allowed");
+        return;
+      }
+
+      if (sanitizedInputWord === activeLevelDefinition.source_word || activeLevelAttemptLinkWords.includes(sanitizedInputWord)) {
+        setAddWordMessage("That word has already been used in the puzzle");
+        return;
+      }
+
+      const previousWord = activeLevelAttemptLinkWords.length
+        ? activeLevelAttemptLinkWords[activeLevelAttemptLinkWords.length - 1] : activeLevelDefinition.source_word;
+
+      if (!wordsAreCloseEnough(previousWord, sanitizedInputWord)) {
+        setAddWordMessage("That word is not close enough the previous word. Take a look at the rules again.");
+        return;
+      }
+
+      if (!(await wordExists(sanitizedInputWord))) {
+        setAddWordMessage("That word doesn't exist in the game dictionary.");
+        return;
+      }
+
+      setActiveLevelAttemptLinkWords(w => {
+        w.push(sanitizedInputWord);
+        setUserPuzzle(up => {
+          up.attempt[activeLevel] = {
+            link_words: w
+          };
+          storeUserPuzzle(up);
+          return up;
+        });
+        setInputWord("");
+        if (sanitizedInputWord === activeLevelDefinition.destination_word) {
+          setGameFinished(true);
+          setShowWinModal(true);
+        }
+        setAddWordMessage(undefined);
+        return w;
+      });
+    }
+
+    setAddWordInProgress(true);
+    try {
+      await addWord();
+    } finally {
+      setAddWordInProgress(false);
+    }
   }
 
   const revert = (index) => {
@@ -113,6 +124,7 @@ const App = () => {
         return up;
       });
       setInputWord("");
+      setAddWordMessage(undefined);
       setGameFinished(false);
       return w;
     })
@@ -158,6 +170,25 @@ const App = () => {
       onClick={() => revert(props.index)}
     ><i className="fa-solid fa-clock-rotate-left"></i></Button>
   </ListGroup.Item>;
+
+  const AddWordButton = (props) => <Button
+    variant="primary"
+    disabled={props.spinning}
+    size="sm"
+    className="ms-auto"
+    onClick={submitWord}
+  >
+    {(props.spinning ? <>
+      <Spinner
+        as="span"
+        animation="border"
+        size="sm"
+        role="status"
+        aria-hidden="true"
+      />
+      <span className="visually-hidden">&hellip;</span>
+    </> : <i className="fa-solid fa-plus"></i>)}
+  </Button>;
 
   const ShareButton = () => <div className="d-grid gap-2">
     <Button variant="success" size="lg" onClick={share}>
@@ -211,14 +242,7 @@ const App = () => {
                 onKeyUp={(e) => { if (e.code === 'Enter') { submitWord(); } }}
                 onChange={(e) => { setInputWord(e.target.value) }}
               />
-              <Button
-                variant="primary"
-                size="sm"
-                className="ms-auto"
-                onClick={submitWord}
-              >
-                <i className="fa-solid fa-plus"></i>
-              </Button>
+              <AddWordButton spinning={addWordInProgress} />
             </div>
             {(addWordMessage ? <p className="mt-3 text-danger">
               <strong>{addWordMessage}</strong>
