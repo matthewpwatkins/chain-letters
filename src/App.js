@@ -240,7 +240,7 @@ const App = () => {
           <li>Add a letter (ex. SITE &rarr; SITE)</li>
           <li>Replace a letter (ex. SITE &rarr; MITE)</li>
           <li>Swap two letters (ex. MITE &rarr; TIME)</li>
-          <li>Move the first letter to the end (ex. RING &rarr; GRIN)</li>
+          <li>Move the first letter to the end (ex. GRIN &rarr; RING)</li>
           <li>Move the last letter to the front (ex. KISS &rarr; SKIS)</li>
         </ul>
       </p>
