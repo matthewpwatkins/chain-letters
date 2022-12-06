@@ -26,7 +26,6 @@ const App = () => {
   const [activeLevelDefinition, setActiveLevelDefinition] = useState({});
   const [activeLevelAttemptLinkWords, setActiveLevelAttemptLinkWords] = useState([]);
 
-
   useEffect(() => {
     const lPadZeroNumber = (number, length) => {
       return (number + "").padStart(length, "0");
@@ -222,7 +221,7 @@ const App = () => {
               </Button>
             </div>
             {(addWordMessage ? <p className="mt-3 text-danger">
-              <strong>{addWordMessage.content}</strong>
+              <strong>{addWordMessage}</strong>
             </p> : <></>)}
           </ListGroup.Item>
         )}
