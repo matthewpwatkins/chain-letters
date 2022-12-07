@@ -6,9 +6,13 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import Form from 'react-bootstrap/Form';
+import Nav from 'react-bootstrap/Nav';
 import Modal from 'react-bootstrap/Modal';
 import { getUserPuzzle, storeUserPuzzle } from './StorageManager';
 import { wordExists, wordsAreCloseEnough } from './WordJudge';
+// https://fontawesome.com/docs/web/use-with/react/add-icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 const ALPHA_REGEX = /^[a-z]+$/i;
 
@@ -156,11 +160,11 @@ const App = () => {
   const DefinitionRow = (props) => <ListGroup.Item variant="primary" className="d-flex">
     <div className="flex-grow-1 text-center">
       <span className="link-word">{props.sourceWord}</span>
-      <i className="fa-solid fa-arrow-right mx-2"></i>
+      <FontAwesomeIcon icon={solid("arrow-right")} className="mx-2" />
       <span className="link-word">{props.destinationWord}</span>
     </div>
     <span className="ms-auto me-2" style={{ cursor: "pointer" }} onClick={() => setShowHelpModal(true)}>
-      <i className="fa-regular fa-circle-question"></i>
+      <FontAwesomeIcon icon={solid("circle-question")} />
     </span>
   </ListGroup.Item >;
 
@@ -172,7 +176,9 @@ const App = () => {
       size="sm"
       className="ms-auto"
       onClick={() => revert(props.index)}
-    ><i className="fa-solid fa-clock-rotate-left"></i></Button>
+    >
+      <FontAwesomeIcon icon={solid("clock-rotate-left")} />
+    </Button>
   </ListGroup.Item>;
 
   const AddWordButton = (props) => <Button
@@ -191,14 +197,29 @@ const App = () => {
         aria-hidden="true"
       />
       <span className="visually-hidden">&hellip;</span>
-    </> : <i className="fa-solid fa-plus"></i>)}
+    </> : <FontAwesomeIcon icon={solid("plus")} />)}
   </Button>;
 
   const ShareButton = () => <div className="d-grid gap-2">
     <Button variant="success" size="lg" onClick={share}>
-      <i className="fa-solid fa-share-nodes"></i> Share
+      <FontAwesomeIcon icon={solid("share-nodes")} /> Share
     </Button>
   </div>
+
+  const Footer = () => <Container fluid className="app-container footer py-2 mt-auto">
+    <Nav fill>
+      <Nav.Item>
+        <Nav.Link href="https://watkins.dev" target="_blank">
+          <FontAwesomeIcon icon={solid("user")} className="me-1" /> Donate
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="https://paypal.me/watkinsmatthewp" target="_blank">
+          <FontAwesomeIcon icon={solid("hand-holding-dollar")} className="me-1" /> Donate
+        </Nav.Link>
+      </Nav.Item>
+    </Nav>
+  </Container>;
 
   const WinModal = (props) => <Modal show={props.show} fullscreen="sm-down" centered onHide={() => setShowWinModal(false)}>
     <Modal.Header closeButton>
@@ -224,7 +245,7 @@ const App = () => {
 
   const HelpModal = (props) => <Modal show={props.show} fullscreen="sm-down" centered onHide={() => setShowHelpModal(false)}>
     <Modal.Header closeButton>
-      <Modal.Title><i className="fa-regular fa-circle-question"></i> How to play</Modal.Title>
+      <Modal.Title><FontAwesomeIcon icon={solid("circle-question")} /> How to play</Modal.Title>
     </Modal.Header>
     <Modal.Body>
       <p>
@@ -253,41 +274,45 @@ const App = () => {
     </Modal.Footer>
   </Modal>;
 
-  return (userPuzzle ? (<Container fluid className='app-container'>
-    <PuzzleHeader puzzleID={userPuzzle.definition.id} />
-    <Card border="primary" className="my-3">
-      <ListGroup variant="flush">
-        <DefinitionRow
-          sourceWord={activeLevelDefinition.source_word}
-          destinationWord={activeLevelDefinition.destination_word}
-        />
-        {activeLevelAttemptLinkWords.map((linkWord, index) => <LinkWordRow
-          key={linkWord}
-          index={index}
-          word={linkWord}
-          isWinningWord={gameFinished && index === activeLevelAttemptLinkWords.length - 1}
-        />)}
-        {(gameFinished ? (<></>) :
-          <ListGroup.Item>
-            <div className="d-flex gap-2">
-              <Form.Control
-                className="m-0"
-                value={inputWord}
-                placeholder="Next word..."
-                onKeyUp={(e) => { if (e.code === 'Enter') { submitWord(); } }}
-                onChange={(e) => { setInputWord(e.target.value) }}
-              />
-              <AddWordButton spinning={addWordInProgress} />
-            </div>
-            {(addWordMessage ? <p className="mt-3 text-danger">
-              <strong>{addWordMessage}</strong>
-            </p> : <></>)}
-          </ListGroup.Item>
-        )}
-      </ListGroup>
-    </Card>
+  return (userPuzzle ? (<>
+    <Container fluid className='app-container'>
+      <PuzzleHeader puzzleID={userPuzzle.definition.id} />
+      <Card border="primary" className="my-3">
+        <ListGroup variant="flush">
+          <DefinitionRow
+            sourceWord={activeLevelDefinition.source_word}
+            destinationWord={activeLevelDefinition.destination_word}
+          />
+          {activeLevelAttemptLinkWords.map((linkWord, index) => <LinkWordRow
+            key={linkWord}
+            index={index}
+            word={linkWord}
+            isWinningWord={gameFinished && index === activeLevelAttemptLinkWords.length - 1}
+          />)}
+          {(gameFinished ? (<></>) :
+            <ListGroup.Item>
+              <div className="d-flex gap-2">
+                <Form.Control
+                  className="m-0"
+                  value={inputWord}
+                  placeholder="Next word..."
+                  onKeyUp={(e) => { if (e.code === 'Enter') { submitWord(); } }}
+                  onChange={(e) => { setInputWord(e.target.value) }}
+                />
+                <AddWordButton spinning={addWordInProgress} />
+              </div>
+              {(addWordMessage ? <p className="mt-3 text-danger">
+                <strong>{addWordMessage}</strong>
+              </p> : <></>)}
+            </ListGroup.Item>
+          )}
+        </ListGroup>
+      </Card>
 
-    {(gameFinished ? (<ShareButton />) : <></>)}
+      {(gameFinished ? (<ShareButton />) : <></>)}
+    </Container>
+
+    <Footer />
 
     <WinModal
       show={showWinModal}
@@ -301,7 +326,7 @@ const App = () => {
       destinationWord={activeLevelDefinition.destination_word}
       chainLength={activeLevelAttemptLinkWords.length}
     />
-  </Container >) : (<></>));
+  </>) : (<></>));
 };
 
 export default App;
