@@ -6,6 +6,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import Form from 'react-bootstrap/Form';
+import Image from 'react-bootstrap/Image'
 import Nav from 'react-bootstrap/Nav';
 import Modal from 'react-bootstrap/Modal';
 import { getUserPuzzle, storeUserPuzzle, getUserPreferences, storeUserPreferences } from './StorageManager';
@@ -155,7 +156,13 @@ const App = () => {
   }
 
   const PuzzleHeader = (props) => <>
-    <h1 className="display-5 my-3 text-center">⛓️ Chain Letters 🔡</h1>
+    <h1 className="display-5 my-3 text-center">
+      <Image src="./android-chrome-192x192.png" className="me-3" style={{
+        maxHeight: "2.5rem",
+        marginTop: "-.5rem"
+      }}></Image>
+      Chain Letters
+    </h1>
     <p className="lead text-center">
       <span>&#x2014;</span>
       <span className="mx-3">{props.puzzleID}</span>
