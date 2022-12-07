@@ -220,6 +220,10 @@ const App = () => {
   </div>
 
   const Footer = () => <Container fluid className="app-container footer py-2 mt-auto">
+    <p class="text-secondary text-center" style={{ fontSize: "smaller" }}>
+      &copy; {new Date().getFullYear()} Matthew Watkins
+      <hr />
+    </p>
     <Nav fill>
       <Nav.Item>
         <Nav.Link href="https://watkins.dev" target="_blank">
