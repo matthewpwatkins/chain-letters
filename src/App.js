@@ -219,11 +219,7 @@ const App = () => {
     </Button>
   </div>
 
-  const Footer = () => <Container fluid className="app-container footer py-2 mt-auto bg-white" style={{
-    borderBottom: "1px solid #6b6b6d",
-    borderLeft: "1px solid #6b6b6d",
-    borderRight: "1px solid #6b6b6d"
-  }}>
+  const Footer = () => <Container fluid className="app-container footer py-2 mt-auto">
     <Nav fill>
       <Nav.Item>
         <Nav.Link href="https://watkins.dev" target="_blank">
@@ -293,11 +289,7 @@ const App = () => {
   </Modal>;
 
   return (userPuzzle ? (<>
-    <Container fluid className="app-container bg-white flex-grow-1" style={{
-      borderTop: "1px solid #6b6b6d",
-      borderLeft: "1px solid #6b6b6d",
-      borderRight: "1px solid #6b6b6d"
-    }}>
+    <Container fluid className='app-container'>
       <PuzzleHeader puzzleID={userPuzzle.definition.id} />
       <Card border="primary" className="my-3">
         <ListGroup variant="flush">
@@ -332,7 +324,7 @@ const App = () => {
       </Card>
 
       {(gameFinished ? (<ShareButton />) : <></>)}
-    </Container >
+    </Container>
 
     <Footer />
 
