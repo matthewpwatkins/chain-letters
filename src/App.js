@@ -8,7 +8,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Modal from 'react-bootstrap/Modal';
-import { getUserPuzzle, storeUserPuzzle } from './StorageManager';
+import { getUserPuzzle, storeUserPuzzle, getUserPreferences, storeUserPreferences } from './StorageManager';
 import { wordExists, wordsAreCloseEnough } from './WordJudge';
 // https://fontawesome.com/docs/web/use-with/react/add-icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -46,6 +46,7 @@ const App = () => {
     };
 
     const load = async () => {
+      const mUserPreferences = getUserPreferences();
       const mUserPuzzle = await getUserPuzzle(getShortDateString(new Date()));
       const mActiveLevel = mUserPuzzle.attempt.last_attempted_level || 'easy';
       const mActiveLevelDefinition = mUserPuzzle.definition[mActiveLevel];
@@ -56,7 +57,12 @@ const App = () => {
       setActiveLevel(mActiveLevel);
       setActiveLevelDefinition(mActiveLevelDefinition);
       setActiveLevelAttemptLinkWords(mActiveLevelAttempt.link_words);
-      setGameFinished(mActiveLevelAttempt.link_words.length && mActiveLevelAttempt.link_words[mActiveLevelAttempt.link_words.length - 1] === mActiveLevelDefinition.destination_word);
+      setGameFinished(mActiveLevelAttempt.link_words.length && mActiveLevelAttempt.link_words[mActiveLevelAttempt.link_words.length - 1] === mActiveLevelDefinition.destination_word)
+      if (mUserPreferences.new_player) {
+        setShowHelpModal(true);
+        mUserPreferences.new_player = false;
+        storeUserPreferences(mUserPreferences);
+      }
     };
     load();
   }, []);
@@ -265,11 +271,12 @@ const App = () => {
           <li>Move the last letter to the front (ex. KISS &rarr; SKIS)</li>
         </ul>
       </p>
+      <p>You can access this guide any time by pressing the help (?) icon</p>
       <p>Good luck!</p>
     </Modal.Body>
     <Modal.Footer>
       <Button variant="primary" onClick={() => setShowHelpModal(false)}>
-        Back to game
+        To the game!
       </Button>
     </Modal.Footer>
   </Modal>;

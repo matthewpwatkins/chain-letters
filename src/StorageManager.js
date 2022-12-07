@@ -21,6 +21,16 @@ export const getPuzzleDefinition = async (id) => {
   };
 };
 
+export const getUserPreferences = () => {
+  return readLocalStorage('user.preferences', {
+    new_player: true
+  });
+}
+
+export const storeUserPreferences = (prefs) => {
+  setLocalStorage('user.preferences', prefs);
+}
+
 export const getUserPuzzle = async (id) => {
   let userPuzzle = readLocalStorage(`puzzles.${id}`);
   if (userPuzzle) {
