@@ -262,8 +262,10 @@ const App = () => {
     </Modal.Header>
     <Modal.Body>
       <p>
-        In this game, you build a chain of words from the starting word to the ending word.
-        Each link in the chain must be:
+        Chain Letters is a word game where the goal is to build a chain of words from the starting word to the ending word,
+        using as few links possible. Each link in the chain must be:
+      </p>
+      <p>
         <ol>
           <li>A valid English word</li>
           <li>Only one letter different from the word before.</li>
@@ -271,6 +273,8 @@ const App = () => {
       </p>
       <p>
         To create a new word, you may do one of the following:
+      </p>
+      <p>
         <ul>
           <li>Remove a letter (ex. SLIT &rarr; SIT)</li>
           <li>Add a letter (ex. SIT &rarr; SITE)</li>
@@ -286,7 +290,10 @@ const App = () => {
       <p className="text-center">
         <Image fluid src="https://watkins.dev/chainletters/example.jpg" className="text-center" />
       </p>
-      <p>You can access this guide any time by pressing the help (?) icon</p>
+      <p>
+        Click the revert icon to reset your work to right before that word any time you want to go back.
+        You can access this guide any time by pressing the help (?) icon
+      </p>
       <p>Good luck!</p>
     </Modal.Body>
     <Modal.Footer>
