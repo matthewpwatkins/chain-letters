@@ -223,7 +223,7 @@ const App = () => {
     <Nav fill>
       <Nav.Item>
         <Nav.Link href="https://watkins.dev" target="_blank">
-          <FontAwesomeIcon icon={solid("user")} className="me-1" /> Donate
+          <FontAwesomeIcon icon={solid("user")} className="me-1" /> About
         </Nav.Link>
       </Nav.Item>
       <Nav.Item>
