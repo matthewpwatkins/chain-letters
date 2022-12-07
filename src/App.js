@@ -157,7 +157,7 @@ const App = () => {
 
   const PuzzleHeader = (props) => <>
     <h1 className="display-5 my-3 text-center">
-      <Image src="./android-chrome-192x192.png" className="me-3" style={{
+      <Image src="https://watkins.dev/chainletters/android-chrome-192x192.png" className="me-3" style={{
         maxHeight: "2.5rem",
         marginTop: "-.5rem"
       }} />
@@ -282,7 +282,9 @@ const App = () => {
       </p>
       <p>
         For example, to here's how you might convert the word "WRONG" to the word "RIGHT."
-        <Image fluid src="./example.jpg" />
+      </p>
+      <p className="text-center">
+        <Image fluid src="https://watkins.dev/chainletters/example.jpg" className="text-center" />
       </p>
       <p>You can access this guide any time by pressing the help (?) icon</p>
       <p>Good luck!</p>
@@ -292,7 +294,7 @@ const App = () => {
         To the game!
       </Button>
     </Modal.Footer>
-  </Modal >;
+  </Modal>;
 
   return (userPuzzle ? (<>
     <Container fluid className='app-container'>
