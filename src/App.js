@@ -160,7 +160,7 @@ const App = () => {
       <Image src="./android-chrome-192x192.png" className="me-3" style={{
         maxHeight: "2.5rem",
         marginTop: "-.5rem"
-      }}></Image>
+      }} />
       Chain Letters
     </h1>
     <p className="lead text-center">
@@ -262,21 +262,27 @@ const App = () => {
     </Modal.Header>
     <Modal.Body>
       <p>
-        Create a chain of words from the starting word to the ending word.
-        In today's puzzle, you need to form a chain from <span className="link-word px-1">{props.sourceWord}</span>
-        to <span className="link-word px-1">{props.destinationWord}</span>. Each link in the chain must be a valid
-        word in the dictionary and must be a small change from the previous link.
+        In this game, you build a chain of words from the starting word to the ending word.
+        Each link in the chain must be:
+        <ol>
+          <li>A valid English word</li>
+          <li>Only one letter different from the word before.</li>
+        </ol>
       </p>
       <p>
-        There are a few types of changes you can apply from one link to another:
+        To create a new word, you may do one of the following:
         <ul>
           <li>Remove a letter (ex. SLIT &rarr; SIT)</li>
-          <li>Add a letter (ex. SITE &rarr; SITE)</li>
+          <li>Add a letter (ex. SIT &rarr; SITE)</li>
           <li>Replace a letter (ex. SITE &rarr; MITE)</li>
-          <li>Swap two letters (ex. MITE &rarr; TIME)</li>
+          <li>Swap two letters (ex. swap M and I, MITE &rarr; TIME)</li>
           <li>Move the first letter to the end (ex. GRIN &rarr; RING)</li>
           <li>Move the last letter to the front (ex. KISS &rarr; SKIS)</li>
         </ul>
+      </p>
+      <p>
+        For example, to here's how you might convert the word "WRONG" to the word "RIGHT."
+        <Image fluid src="./example.jpg" />
       </p>
       <p>You can access this guide any time by pressing the help (?) icon</p>
       <p>Good luck!</p>
@@ -286,7 +292,7 @@ const App = () => {
         To the game!
       </Button>
     </Modal.Footer>
-  </Modal>;
+  </Modal >;
 
   return (userPuzzle ? (<>
     <Container fluid className='app-container'>
