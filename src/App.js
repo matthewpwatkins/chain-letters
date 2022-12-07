@@ -258,7 +258,7 @@ const App = () => {
 
   const HelpModal = (props) => <Modal show={props.show} fullscreen="sm-down" centered onHide={() => setShowHelpModal(false)}>
     <Modal.Header closeButton>
-      <Modal.Title><FontAwesomeIcon icon={solid("circle-question")} /> How to play</Modal.Title>
+      <Modal.Title><FontAwesomeIcon icon={solid("circle-question")} className="text-primary" /> How to play</Modal.Title>
     </Modal.Header>
     <Modal.Body>
       <p>
