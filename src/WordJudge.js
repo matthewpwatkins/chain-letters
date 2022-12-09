@@ -46,6 +46,23 @@ const isSingleLetterSwap = (a, b) => {
     && b[diffIndices[0]] === a[diffIndices[1]];
 };
 
+const isReverse = (a, b) => {
+  if (a.length !== b.length) {
+    return false;
+  }
+  if (a === b) {
+    // I mean it could be a panlindrome, but in this context that's a duplicate
+    return false;
+  }
+
+  for (let i = 0; i < a.lengt; i++) {
+    if (a[i] !== b[i.length - 1 - i]) {
+      return false;
+    }
+  }
+  return true;
+}
+
 const isShift = (a, b) => {
   if (a.length !== b.length) {
     return false;
@@ -60,6 +77,9 @@ const isShift = (a, b) => {
 
 export const wordsAreCloseEnough = (a, b) => {
   if (isShift(a, b)) {
+    return true;
+  }
+  if (isReverse(a, b)) {
     return true;
   }
 

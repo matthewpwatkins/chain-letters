@@ -286,6 +286,7 @@ const App = () => {
           <li>Swap two letters (ex. swap M and I, MITE &rarr; TIME)</li>
           <li>Move the first letter to the end (ex. GRIN &rarr; RING)</li>
           <li>Move the last letter to the front (ex. KISS &rarr; SKIS)</li>
+          <li>Reverse the word (ex. FREE &rarr; REEF)</li>
         </ul>
       </p>
       <p>
