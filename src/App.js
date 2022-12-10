@@ -7,8 +7,8 @@ import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import Form from 'react-bootstrap/Form';
 import Image from 'react-bootstrap/Image'
-import Nav from 'react-bootstrap/Nav';
 import Modal from 'react-bootstrap/Modal';
+import { Footer } from './Footer';
 import { getUserPuzzle, storeUserPuzzle, getUserPreferences, storeUserPreferences } from './StorageManager';
 import { wordExists, wordsAreCloseEnough } from './WordJudge';
 // https://fontawesome.com/docs/web/use-with/react/add-icons
@@ -218,25 +218,6 @@ const App = () => {
       <FontAwesomeIcon icon={solid("share-nodes")} /> Share
     </Button>
   </div>
-
-  const Footer = () => <Container fluid className="app-container footer py-2 mt-auto">
-    <p class="text-secondary text-center" style={{ fontSize: "smaller" }}>
-      &copy; {new Date().getFullYear()} Matthew Watkins
-      <hr />
-    </p>
-    <Nav fill>
-      <Nav.Item>
-        <Nav.Link href="https://watkins.dev" target="_blank">
-          <FontAwesomeIcon icon={solid("user")} className="me-1" /> About
-        </Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link href="https://paypal.me/watkinsmatthewp" target="_blank">
-          <FontAwesomeIcon icon={solid("hand-holding-dollar")} className="me-1" /> Donate
-        </Nav.Link>
-      </Nav.Item>
-    </Nav>
-  </Container>;
 
   const WinModal = (props) => <Modal show={props.show} fullscreen="sm-down" centered onHide={() => setShowWinModal(false)}>
     <Modal.Header closeButton>
