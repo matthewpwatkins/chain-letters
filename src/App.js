@@ -6,9 +6,10 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import Form from 'react-bootstrap/Form';
-import Image from 'react-bootstrap/Image'
+import Image from 'react-bootstrap/Image';
 import Modal from 'react-bootstrap/Modal';
 import { Footer } from './Footer';
+import { PuzzleHeader } from './PuzzleHeader';
 import { getUserPuzzle, storeUserPuzzle, getUserPreferences, storeUserPreferences } from './StorageManager';
 import { wordExists, wordsAreCloseEnough } from './WordJudge';
 // https://fontawesome.com/docs/web/use-with/react/add-icons
@@ -155,20 +156,6 @@ const App = () => {
     }
   }
 
-  const PuzzleHeader = (props) => <>
-    <h1 className="display-5 my-3 text-center">
-      <Image src="https://watkins.dev/chainletters/android-chrome-192x192.png" className="me-3" style={{
-        maxHeight: "2.5rem",
-        marginTop: "-.5rem"
-      }} />
-      Chain Letters
-    </h1>
-    <p className="lead text-center">
-      <span>&#x2014;</span>
-      <span className="mx-3">{props.puzzleID}</span>
-      <span>&#x2014;</span>
-    </p>
-  </>;
 
   const DefinitionRow = (props) => <ListGroup.Item variant="primary" className="d-flex">
     <div className="flex-grow-1 text-center">

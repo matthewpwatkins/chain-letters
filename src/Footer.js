@@ -5,7 +5,7 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import Nav from 'react-bootstrap/Nav';
 
 export const Footer = () => <Container fluid className="app-container footer py-2 mt-auto">
-  <p class="text-secondary text-center" style={{ fontSize: "smaller" }}>
+  <p className="text-secondary text-center" style={{ fontSize: "smaller" }}>
     &copy; {new Date().getFullYear()} Matthew Watkins
     <hr />
   </p>
