@@ -143,19 +143,55 @@ const App = () => {
     })
   }
 
+  const getEmojiDigit = (digit) => {
+    switch (digit + '') {
+      case '0':
+        return '0️⃣';
+      case '1':
+        return '1️⃣'
+      case '2':
+        return '2️⃣';
+      case '3':
+        return '3️⃣';
+      case '4':
+        return '4️⃣';
+      case '5':
+        return '5️⃣';
+      case '6':
+        return '6️⃣';
+      case '7':
+        return '7️⃣';
+      case '8':
+        return '8️⃣';
+      case '9':
+        return '9️⃣';
+      default:
+        throw new Error("Can't get an emoji digit for " + digit);
+    }
+  }
+
+  const getEmojiNumber = (number) => {
+    let result = '';
+    const numberString = '' + number;
+    for (let i = 0; i < numberString.length; i++) {
+      result += getEmojiDigit(numberString[i]);
+    }
+    return result;
+  }
+
   const share = async () => {
+    let text = `Chain Letters \n${userPuzzle.definition.id}`;
+    text += `\n${activeLevelDefinition.source_word.toUpperCase()}=>${activeLevelDefinition.destination_word.toUpperCase()}`;
+    text += `\n🔗${getEmojiNumber(activeLevelAttemptLinkWords.length)}`;
+
     try {
-      await navigator.share({
-        title: '⛓️ Chain Letters 🔡',
-        url: window.location,
-        text: `⛓️ Chain Letters 🔡\n${userPuzzle.definition.id}\n${activeLevelDefinition.source_word}=>${activeLevelDefinition.destination_word}\n\n${activeLevelAttemptLinkWords.length} links`
-      });
+      await navigator.clipboard.writeText(text);
+      await navigator.share({ text: text });
     } catch (err) {
       console.error(err);
       alert('Your browser doesn\'t support sharing. Screenshot, I guess?');
     }
   }
-
 
   const DefinitionRow = (props) => <ListGroup.Item variant="primary" className="d-flex">
     <div className="flex-grow-1 text-center">
