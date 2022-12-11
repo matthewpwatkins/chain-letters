@@ -55,8 +55,8 @@ const isReverse = (a, b) => {
     return false;
   }
 
-  for (let i = 0; i < a.lengt; i++) {
-    if (a[i] !== b[i.length - 1 - i]) {
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] !== b[b.length - 1 - i]) {
       return false;
     }
   }
