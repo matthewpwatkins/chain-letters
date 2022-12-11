@@ -179,14 +179,27 @@ const App = () => {
     return result;
   }
 
+  const generateSolutionUrl = () => {
+    let url = `https://watkins.dev/chainletters/solution?id=${userPuzzle.definition.id}&words=${activeLevelDefinition.source_word}`;
+    for (const linkWord of activeLevelAttemptLinkWords) {
+      url += `,${linkWord}`;
+    }
+    return url;
+  }
+
   const share = async () => {
+    const link = generateSolutionUrl();
     let text = `Chain Letters \n${userPuzzle.definition.id}`;
-    text += `\n${activeLevelDefinition.source_word.toUpperCase()}=>${activeLevelDefinition.destination_word.toUpperCase()}`;
-    text += `\n🔗${getEmojiNumber(activeLevelAttemptLinkWords.length)}`;
+    text += `\n${activeLevelDefinition.source_word.toUpperCase()} => ${activeLevelDefinition.destination_word.toUpperCase()}`;
+    text += `\n🔗 ${getEmojiNumber(activeLevelAttemptLinkWords.length)} links`;
+    text += `\nSee my chain here: ${link}`;
 
     try {
       await navigator.clipboard.writeText(text);
-      await navigator.share({ text: text });
+      await navigator.share({
+        url: link,
+        text: text
+      });
     } catch (err) {
       console.error(err);
       alert('Your browser doesn\'t support sharing. Screenshot, I guess?');
