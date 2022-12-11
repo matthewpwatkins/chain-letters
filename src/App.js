@@ -208,7 +208,6 @@ const App = () => {
     let text = `Chain Letters \n${userPuzzle.definition.id}`;
     text += `\n${activeLevelDefinition.source_word.toUpperCase()} => ${activeLevelDefinition.destination_word.toUpperCase()}`;
     text += `\n🔗 ${getEmojiNumber(activeLevelAttemptLinkWords.length)} links`;
-    text += `\nSee my chain here: ${link}`;
 
     try {
       await navigator.clipboard.writeText(text);
