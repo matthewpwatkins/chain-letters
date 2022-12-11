@@ -179,16 +179,32 @@ const App = () => {
     return result;
   }
 
-  const generateSolutionUrl = () => {
-    let url = `https://watkins.dev/chainletters/solution?id=${userPuzzle.definition.id}&words=${activeLevelDefinition.source_word}`;
+  const generateSolutionUrl = async () => {
+    let longURL = `https://watkins.dev/chainletters/solution?id=${userPuzzle.definition.id}&words=${activeLevelDefinition.source_word}`;
     for (const linkWord of activeLevelAttemptLinkWords) {
-      url += `,${linkWord}`;
+      longURL += `,${linkWord}`;
     }
-    return url;
+
+    const encodedParams = new URLSearchParams();
+    encodedParams.append("url", longURL);
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'X-RapidAPI-Key': 'c02613d5a5msh726328d982e08f2p137f50jsn3b6a0ebeb75c',
+        'X-RapidAPI-Host': 'url-shortener-service.p.rapidapi.com'
+      },
+      body: encodedParams
+    };
+
+    const shortenerRes = await fetch('https://url-shortener-service.p.rapidapi.com/shorten', options);
+    const res = await shortenerRes.json();
+    return res.result_url;
   }
 
   const share = async () => {
-    const link = generateSolutionUrl();
+    const link = await generateSolutionUrl();
     let text = `Chain Letters \n${userPuzzle.definition.id}`;
     text += `\n${activeLevelDefinition.source_word.toUpperCase()} => ${activeLevelDefinition.destination_word.toUpperCase()}`;
     text += `\n🔗 ${getEmojiNumber(activeLevelAttemptLinkWords.length)} links`;
