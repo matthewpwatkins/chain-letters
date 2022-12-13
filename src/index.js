@@ -11,15 +11,10 @@ const root = createRoot(container);
 if (window.location.pathname.endsWith('/solution')) {
   const url = new URL(window.location);
   const puzzleID = url.searchParams.get('id');
-  const words = url.searchParams.get('words').split(',');
-  const sourceWord = words[0];
-  const destinationWord = words[words.length - 1];
-  const linkWords = words.slice(1);
+  const linkWords = url.searchParams.get('words').split(',');
 
   root.render(<SolutionApp
     puzzleID={puzzleID}
-    sourceWord={sourceWord}
-    destinationWord={destinationWord}
     linkWords={linkWords}
   />);
 } else {

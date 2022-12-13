@@ -17,7 +17,7 @@ const SolutionApp = (props) => {
     </div>
   </ListGroup.Item>;
 
-  const LinkWordRow = (props) => <ListGroup.Item variant={props.isWinningWord ? "success" : ""} className="d-flex">
+  const LinkWordRow = (props) => <ListGroup.Item variant={props.variant} className="d-flex">
     <div className="me-2 text-secondary"><strong>{props.index + 1}</strong></div>
     <div className="link-word">{props.word}</div>
   </ListGroup.Item>;
@@ -27,14 +27,15 @@ const SolutionApp = (props) => {
     <Card border="primary" className="my-3">
       <ListGroup variant="flush">
         <DefinitionRow
-          sourceWord={props.sourceWord}
-          destinationWord={props.destinationWord}
+          sourceWord={props.linkWords[0]}
+          destinationWord={props.linkWords[props.linkWords.length - 1]}
         />
         {props.linkWords.map((linkWord, index) => <LinkWordRow
           key={linkWord}
           index={index}
+          hasNextWord={index !== props.linkWords.length - 1}
           word={linkWord}
-          isWinningWord={index === props.linkWords.length - 1}
+          variant={index === props.linkWords.length - 1 ? "success" : ""}
         />)}
       </ListGroup>
     </Card>

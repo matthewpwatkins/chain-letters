@@ -53,7 +53,7 @@ const App = () => {
       const mActiveLevel = mUserPuzzle.attempt.last_attempted_level || 'easy';
       const mActiveLevelDefinition = mUserPuzzle.definition[mActiveLevel];
       const mActiveLevelAttempt = mUserPuzzle.attempt[mActiveLevel] || {};
-      mActiveLevelAttempt.link_words = mActiveLevelAttempt.link_words || [];
+      mActiveLevelAttempt.link_words = mActiveLevelAttempt.link_words || [mActiveLevelDefinition.source_word];
 
       setUserPuzzle(mUserPuzzle);
       setActiveLevel(mActiveLevel);
@@ -126,9 +126,9 @@ const App = () => {
     }
   }
 
-  const revert = (index) => {
+  const resetTo = (index) => {
     setActiveLevelAttemptLinkWords(w => {
-      w = w.slice(0, index);
+      w = w.slice(0, index + 1);
       setUserPuzzle(up => {
         up.attempt[activeLevel] = {
           link_words: w
@@ -232,17 +232,17 @@ const App = () => {
     </span>
   </ListGroup.Item >;
 
-  const LinkWordRow = (props) => <ListGroup.Item variant={props.isWinningWord ? "success" : ""} className="d-flex">
+  const LinkWordRow = (props) => <ListGroup.Item variant={props.variant} className="d-flex">
     <div className="me-2 text-secondary"><strong>{props.index + 1}</strong></div>
     <div className="link-word">{props.word}</div>
-    <Button
+    {props.hasNextWord ? <Button
       variant="warning"
       size="sm"
       className="ms-auto"
-      onClick={() => revert(props.index)}
+      onClick={() => resetTo(props.index)}
     >
       <FontAwesomeIcon icon={solid("clock-rotate-left")} />
-    </Button>
+    </Button> : <></>}
   </ListGroup.Item>;
 
   const AddWordButton = (props) => <Button
@@ -352,8 +352,9 @@ const App = () => {
           {activeLevelAttemptLinkWords.map((linkWord, index) => <LinkWordRow
             key={linkWord}
             index={index}
+            hasNextWord={index !== activeLevelAttemptLinkWords.length - 1}
             word={linkWord}
-            isWinningWord={gameFinished && index === activeLevelAttemptLinkWords.length - 1}
+            variant={gameFinished && index === activeLevelAttemptLinkWords.length - 1 ? "success" : ""}
           />)}
           {(gameFinished ? (<></>) :
             <ListGroup.Item>
