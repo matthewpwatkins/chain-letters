@@ -2,6 +2,8 @@
 const fs = require('fs');
 var rl = require('readline-sync');
 
+const PUZZLE_DEFINITIONS_PATH = 'public/puzzle-definitions';
+
 Date.prototype.addDays = function (days) {
   let date = new Date(this.valueOf());
   date.setDate(date.getDate() + days);
@@ -15,11 +17,11 @@ Date.prototype.toShortIsoDateString = function () {
 const now = new Date();
 const todayDateString = now.toShortIsoDateString();
 
-if (!fs.existsSync('puzzle-definitions')) {
-  fs.mkdirSync('puzzle-definitions');
+if (!fs.existsSync(PUZZLE_DEFINITIONS_PATH)) {
+  fs.mkdirSync(PUZZLE_DEFINITIONS_PATH);
 }
 
-const existingFileNames = fs.readdirSync('puzzle-definitions').sort();
+const existingFileNames = fs.readdirSync(PUZZLE_DEFINITIONS_PATH).sort();
 const startDateString = existingFileNames.length ? existingFileNames[0].substring(0, 10) : todayDateString;
 const startDate = new Date(`${startDateString}T00:00:00Z`);
 
@@ -30,7 +32,7 @@ for (let i = 0; i < maxIterations; i++) {
   const currentDate = startDate.addDays(i);
   const currentDateString = currentDate.toShortIsoDateString();
   const fileName = `${currentDateString}.json`;
-  const filePath = `puzzle-definitions/${fileName}`;
+  const filePath = `${PUZZLE_DEFINITIONS_PATH}/${fileName}`;
   if (fs.existsSync(filePath)) {
     const puzzle = JSON.parse(fs.readFileSync(filePath));
     usedWords.add(puzzle.source_word);
