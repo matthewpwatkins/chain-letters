@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { PuzzleHeader } from './PuzzleHeader';
+import { Footer } from './Footer';
 // https://fontawesome.com/docs/web/use-with/react/add-icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
@@ -22,7 +23,7 @@ const SolutionApp = (props) => {
     <div className="link-word">{props.word}</div>
   </ListGroup.Item>;
 
-  return <Container fluid className='app-container'>
+  return <><Container fluid className='app-container'>
     <PuzzleHeader puzzleID={props.puzzleID} />
     <Card border="primary" className="my-3">
       <ListGroup variant="flush">
@@ -40,6 +41,7 @@ const SolutionApp = (props) => {
       </ListGroup>
     </Card>
   </Container>
+    <Footer /></>
 };
 
 export default SolutionApp;
