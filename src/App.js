@@ -180,7 +180,7 @@ const App = () => {
   }
 
   const generateSolutionUrl = async () => {
-    let longURL = `https://watkins.dev/chainletters/solution?id=${userPuzzle.definition.id}&words=${activeLevelDefinition.source_word}`;
+    let longURL = `https://chainlettersgame.com/solution?id=${userPuzzle.definition.id}&words=${activeLevelDefinition.source_word}`;
     for (const linkWord of activeLevelAttemptLinkWords) {
       longURL += `,${linkWord}`;
     }
@@ -325,7 +325,7 @@ const App = () => {
         For example, to here's how you might convert the word "WRONG" to the word "RIGHT."
       </p>
       <p className="text-center">
-        <Image fluid src="https://watkins.dev/chainletters/example.jpg" className="text-center" />
+        <Image fluid src="https://chainlettersgame.com/example.jpg" className="text-center" />
       </p>
       <p>
         Click the revert icon to reset your work to right before that word any time you want to go back.
