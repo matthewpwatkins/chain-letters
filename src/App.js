@@ -180,9 +180,14 @@ const App = () => {
   }
 
   const generateSolutionUrl = async () => {
-    let longURL = `https://chainlettersgame.com/solution?id=${userPuzzle.definition.id}&words=${activeLevelDefinition.source_word}`;
+    let longURL = `https://chainlettersgame.com/solution?id=${userPuzzle.definition.id}&words=`;
+    let isFirst = true;
     for (const linkWord of activeLevelAttemptLinkWords) {
-      longURL += `,${linkWord}`;
+      if (!isFirst) {
+        longURL += ',';
+        isFirst = false;
+      }
+      longURL += `${linkWord}`;
     }
 
     const encodedParams = new URLSearchParams();
@@ -230,7 +235,7 @@ const App = () => {
     <span className="ms-auto me-2" style={{ cursor: "pointer" }} onClick={() => setShowHelpModal(true)}>
       <FontAwesomeIcon icon={solid("circle-question")} size="xl" className="text-info" />
     </span>
-  </ListGroup.Item >;
+  </ListGroup.Item>;
 
   const LinkWordRow = (props) => <ListGroup.Item variant={props.variant} className="d-flex">
     <div className="me-2 text-secondary"><strong>{props.index + 1}</strong></div>
