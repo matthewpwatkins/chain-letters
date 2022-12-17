@@ -185,9 +185,9 @@ const App = () => {
     for (const linkWord of activeLevelAttemptLinkWords) {
       if (!isFirst) {
         longURL += ',';
-        isFirst = false;
       }
       longURL += `${linkWord}`;
+      isFirst = false;
     }
 
     const encodedParams = new URLSearchParams();
