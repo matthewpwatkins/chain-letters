@@ -10,7 +10,7 @@ export const PuzzleHeader = (props) => <>
   </h1>
   <p className="lead text-center">
     <span>&#x2014;</span>
-    <span className="mx-3">{props.puzzleID}</span>
+    <span className="mx-3">#{props.puzzleID}</span>
     <span>&#x2014;</span>
   </p>
 </>;

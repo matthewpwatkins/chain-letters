@@ -16,6 +16,9 @@ import { wordExists, wordsAreCloseEnough } from './WordJudge';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 
+// Dec 1, 2022
+const START_DATE_UTC = Date.parse('2022-12-01T00:00:00Z');
+const MS_IN_DAY = 86400000;
 const ALPHA_REGEX = /^[a-z]+$/i;
 
 const App = () => {
@@ -48,8 +51,12 @@ const App = () => {
     };
 
     const load = async () => {
+      const nowLocal = new Date();
+      const comparisonUtc = Date.parse(`${getShortDateString(nowLocal)}T00:00:00Z`);
+      const puzzleID = Math.round((comparisonUtc - START_DATE_UTC) / MS_IN_DAY) + 1;
+
       const mUserPreferences = getUserPreferences();
-      const mUserPuzzle = await getUserPuzzle(getShortDateString(new Date()));
+      const mUserPuzzle = await getUserPuzzle(puzzleID);
       const mActiveLevel = mUserPuzzle.attempt.last_attempted_level || 'easy';
       const mActiveLevelDefinition = mUserPuzzle.definition[mActiveLevel];
       const mActiveLevelAttempt = mUserPuzzle.attempt[mActiveLevel] || {};
