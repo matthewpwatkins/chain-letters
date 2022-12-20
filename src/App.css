@@ -6,3 +6,8 @@
   font-weight: 700;
   text-transform: uppercase;
 }
+
+.remove-decoration {
+  text-decoration: none;
+  color: unset;
+}

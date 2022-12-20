@@ -239,7 +239,7 @@ const App = () => {
       <FontAwesomeIcon icon={solid("arrow-right")} className="mx-2" />
       <span className="link-word">{props.destinationWord}</span>
     </div>
-    <span className="ms-auto me-2" style={{ cursor: "pointer" }} onClick={() => setShowHelpModal(true)}>
+    <span className="ms-auto me-1" style={{ cursor: "pointer" }} onClick={() => setShowHelpModal(true)}>
       <FontAwesomeIcon icon={solid("circle-question")} size="xl" className="text-info" />
     </span>
   </ListGroup.Item>;
