@@ -306,13 +306,17 @@ const App = () => {
 
   const HelpModal = (props) => <Modal show={props.show} fullscreen="sm-down" centered onHide={() => setShowHelpModal(false)}>
     <Modal.Header closeButton>
-      <Modal.Title><FontAwesomeIcon icon={solid("circle-question")} className="text-primary" /> How to play</Modal.Title>
+      <Modal.Title>
+        <FontAwesomeIcon icon={solid("circle-question")} className="text-info me-1" />
+        How to play
+      </Modal.Title>
     </Modal.Header>
     <Modal.Body>
       <p>
-        Chain Letters is a word game where the goal is to build a chain of words from the starting word to the ending word,
-        using as few links possible. Each link in the chain must be:
+        In Chain Letters, you build a chain of words from the starting word to the ending word,
+        using as few links possible.
       </p>
+      <p>Each link in the chain must be:</p>
       <p>
         <ol>
           <li>A valid English word</li>
@@ -340,10 +344,11 @@ const App = () => {
         <Image fluid src="https://chainlettersgame.com/example.jpg" className="text-center" />
       </p>
       <p>
-        Click the revert icon to reset your work to right before that word any time you want to go back.
+        Click the revert icon to reset your work to that word and try again from there.
         You can access this guide any time by pressing the help (?) icon
       </p>
       <p>Good luck!</p>
+      <p>-- Matthew</p>
     </Modal.Body>
     <Modal.Footer>
       <Button variant="primary" onClick={() => setShowHelpModal(false)}>
