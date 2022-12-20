@@ -217,7 +217,7 @@ const App = () => {
 
   const share = async () => {
     const link = await generateSolutionUrl();
-    let text = `Chain Letters \n${userPuzzle.definition.id}`;
+    let text = `ChainLetters #${userPuzzle.definition.id}`;
     text += `\n${activeLevelDefinition.source_word.toUpperCase()} => ${activeLevelDefinition.destination_word.toUpperCase()}`;
     text += `\n🔗 ${getEmojiNumber(activeLevelAttemptLinkWords.length)} links`;
 
