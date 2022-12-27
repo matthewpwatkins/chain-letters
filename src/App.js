@@ -221,7 +221,7 @@ const App = () => {
       + `\nI turned ${activeLevelDefinition.source_word.toUpperCase()} into ${activeLevelDefinition.destination_word.toUpperCase()}`
       + `\nin ${getEmojiNumber(activeLevelAttemptLinkWords.length)} moves.`;
 
-    navigator.clipboard.writeText(text);
+    navigator.clipboard.writeText(text + `\n${link}`);
     let shared = false;
     if (navigator.userAgent.indexOf("Win") === -1 && navigator.canShare) {
       try {
