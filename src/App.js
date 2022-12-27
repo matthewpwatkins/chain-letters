@@ -217,19 +217,24 @@ const App = () => {
 
   const share = async () => {
     const link = await generateSolutionUrl();
-    let text = `ChainLetters #${userPuzzle.definition.id}`;
-    text += `\n${activeLevelDefinition.source_word.toUpperCase()} => ${activeLevelDefinition.destination_word.toUpperCase()}`;
-    text += `\n🔗 ${getEmojiNumber(activeLevelAttemptLinkWords.length)} links`;
+    const text = `#chainletters puzzle #${userPuzzle.definition.id}`
+      + `\nI turned ${activeLevelDefinition.source_word.toUpperCase()} into ${activeLevelDefinition.destination_word.toUpperCase()}`
+      + `\nin ${getEmojiNumber(activeLevelAttemptLinkWords.length)} moves.`;
 
-    try {
-      await navigator.clipboard.writeText(text);
-      await navigator.share({
-        url: link,
-        text: text
-      });
-    } catch (err) {
-      console.error(err);
-      alert('Your browser doesn\'t support sharing. Screenshot, I guess?');
+    navigator.clipboard.writeText(text);
+    let shared = false;
+    if (navigator.userAgent.indexOf("Win") === -1 && navigator.canShare) {
+      try {
+        await navigator.share({
+          url: link,
+          text: text
+        });
+        shared = true;
+      } catch (err) { }
+    }
+
+    if (!shared) {
+      alert(`I copied the message and link to your clipboard.`);
     }
   }
 
