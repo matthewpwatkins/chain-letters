@@ -332,14 +332,13 @@ const App = () => {
         To create a new word, you may do one of the following:
       </p>
       <p>
-        <ul>
-          <li>Remove a letter (ex. SLIT &rarr; SIT)</li>
-          <li>Add a letter (ex. SIT &rarr; SITE)</li>
-          <li>Replace a letter (ex. SITE &rarr; MITE)</li>
-          <li>Swap two letters (ex. swap M and I, MITE &rarr; TIME)</li>
-          <li>Move the first letter to the end (ex. GRIN &rarr; RING)</li>
-          <li>Move the last letter to the front (ex. KISS &rarr; SKIS)</li>
-          <li>Reverse the word (ex. FREE &rarr; REEF)</li>
+        <ul className="list-unstyled">
+          <li><FontAwesomeIcon icon={solid("plus-square")} className="text-primary me-1" /> Add a letter (CARE &rarr; <u>S</u>CARE)</li>
+          <li><FontAwesomeIcon icon={solid("trash")} className="text-primary me-1" /> Remove a letter (CAR<u>E</u> &rarr; CAR)</li>
+          <li><FontAwesomeIcon icon={solid("pen")} className="text-primary me-1" /> Replace a letter (C<u>A</u>RE &rarr; C<u>U</u>RE)</li>
+          <li><FontAwesomeIcon icon={solid("arrow-right-long")} className="text-primary me-1" /> Move a letter (CARE<u>S</u> &rarr; <u>S</u>CARE)</li>
+          <li><FontAwesomeIcon icon={solid("shuffle")} className="text-primary me-1" /> Swap two letters (<u>C</u>A<u>R</u>E &rarr; <u>R</u>A<u>C</u>E)</li>
+          <li><FontAwesomeIcon icon={solid("right-left")} className="text-primary me-1" /> Reverse the word (ex. FREE &rarr; REEF)</li>
         </ul>
       </p>
       <p>
@@ -349,8 +348,10 @@ const App = () => {
         <Image fluid src="https://chainlettersgame.com/example.jpg" className="text-center" />
       </p>
       <p>
-        Click the revert icon to reset your work to that word and try again from there.
-        You can access this guide any time by pressing the help (?) icon
+        Click the revert icon <FontAwesomeIcon icon={solid("clock-rotate-left")} className="text-primary mx-1" />
+        to reset your work to that word and try again from there.
+        You can access this guide any time by pressing the help
+        <FontAwesomeIcon icon={solid("circle-question")} className="text-info mx-1" /> icon
       </p>
       <p>Good luck!</p>
       <p>-- Matthew</p>

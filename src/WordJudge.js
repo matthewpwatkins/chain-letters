@@ -22,7 +22,28 @@ const getLevenshteinDistance = (a, b) => {
   return track[b.length][a.length];
 };
 
-const isSingleLetterSwap = (a, b) => {
+
+const withoutIndex = (word, i) => {
+  return word.slice(0, i) + word.slice(i + 1);
+}
+
+const isSingleLetterAdd = (shorterWord, longerWord) => {
+  if (longerWord.length === shorterWord.length + 1) {
+    for (let i = 0; i < longerWord.length; i++) {
+      if (shorterWord === withoutIndex(longerWord, i)) {
+        return true;
+      }
+    }
+  }
+  return false;
+};
+
+const isReverse = (a, b) => {
+  return a.length === b.length
+    && b === a.split('').reverse().join('');
+};
+
+const isLetterSwap = (a, b) => {
   if (a.length !== b.length) {
     return false;
   }
@@ -46,55 +67,55 @@ const isSingleLetterSwap = (a, b) => {
     && b[diffIndices[0]] === a[diffIndices[1]];
 };
 
-const isReverse = (a, b) => {
+const rotateRight = (word) => {
+  return word.substring(word.length - 1, word.length) + word.substring(0, word.length - 1);
+};
+
+const isSingleLetterShift = (a, b) => {
   if (a.length !== b.length) {
     return false;
   }
   if (a === b) {
-    // I mean it could be a panlindrome, but in this context that's a duplicate
     return false;
+  }
+
+  let startIndex, endIndex;
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] !== b[i]) {
+      startIndex = i;
+      break;
+    }
   }
 
   for (let i = 0; i < a.length; i++) {
-    if (a[i] !== b[b.length - 1 - i]) {
-      return false;
+    if (a[a.length - 1 - i] !== b[b.length - 1 - i]) {
+      endIndex = a.length - 1 - i;
+      break;
     }
   }
-  return true;
-}
 
-const isShift = (a, b) => {
-  if (a.length !== b.length) {
-    return false;
-  }
-  if (a === b) {
-    return false;
-  }
-
-  return b === a.substring(1) + a[0]
-    || b === a[a.length - 1] + a.substring(0, a.length - 1);
+  const aSlice = a.substring(startIndex, endIndex + 1);
+  const bSlice = b.substring(startIndex, endIndex + 1);
+  return aSlice === rotateRight(bSlice)
+    || bSlice === rotateRight(aSlice);
 };
 
 export const wordsAreCloseEnough = (a, b) => {
-  if (isShift(a, b)) {
-    return true;
-  }
-  if (isReverse(a, b)) {
+  if (getLevenshteinDistance(a, b) === 1) {
     return true;
   }
 
-  const lDist = getLevenshteinDistance(a, b);
-
-  if (lDist === 1) {
-    // Single insertion or deletion
-    return true;
+  const lengthDifference = b.length - a.length;
+  if (lengthDifference === 0) {
+    return isReverse(a, b) || isLetterSwap(a, b) || isSingleLetterShift(a, b);
   }
 
-  if (lDist === 2 && isSingleLetterSwap(a, b)) {
-    return true;
+  if (Math.abs(lengthDifference) === 1) {
+    const longerWord = lengthDifference === 1 ? b : a;
+    const shorterWord = lengthDifference === 1 ? a : b;
+    return isSingleLetterAdd(shorterWord, longerWord);
   }
 
-  // Too many changes
   return false;
 };
 
