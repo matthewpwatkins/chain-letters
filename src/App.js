@@ -331,16 +331,14 @@ const App = () => {
       <p>
         To create a new word, you may do one of the following:
       </p>
-      <p>
-        <ul className="list-unstyled">
-          <li><FontAwesomeIcon icon={solid("plus-square")} className="text-primary me-1" /> Add a letter (CARE &rarr; <u>S</u>CARE)</li>
-          <li><FontAwesomeIcon icon={solid("trash")} className="text-primary me-1" /> Remove a letter (CAR<u>E</u> &rarr; CAR)</li>
-          <li><FontAwesomeIcon icon={solid("pen")} className="text-primary me-1" /> Replace a letter (C<u>A</u>RE &rarr; C<u>U</u>RE)</li>
-          <li><FontAwesomeIcon icon={solid("arrow-right-long")} className="text-primary me-1" /> Move a letter (CARE<u>S</u> &rarr; <u>S</u>CARE)</li>
-          <li><FontAwesomeIcon icon={solid("shuffle")} className="text-primary me-1" /> Swap two letters (<u>C</u>A<u>R</u>E &rarr; <u>R</u>A<u>C</u>E)</li>
-          <li><FontAwesomeIcon icon={solid("right-left")} className="text-primary me-1" /> Reverse the word (ex. FREE &rarr; REEF)</li>
-        </ul>
-      </p>
+      <ul className="list-unstyled">
+        <li><FontAwesomeIcon icon={solid("plus-square")} className="text-primary me-1" /> Add a letter (CARE &rarr; <u>S</u>CARE)</li>
+        <li><FontAwesomeIcon icon={solid("trash")} className="text-primary me-1" /> Remove a letter (CAR<u>E</u> &rarr; CAR)</li>
+        <li><FontAwesomeIcon icon={solid("pen")} className="text-primary me-1" /> Replace a letter (C<u>A</u>RE &rarr; C<u>U</u>RE)</li>
+        <li><FontAwesomeIcon icon={solid("arrow-right-long")} className="text-primary me-1" /> Move a letter (CARE<u>S</u> &rarr; <u>S</u>CARE)</li>
+        <li><FontAwesomeIcon icon={solid("shuffle")} className="text-primary me-1" /> Swap two letters (<u>C</u>A<u>R</u>E &rarr; <u>R</u>A<u>C</u>E)</li>
+        <li><FontAwesomeIcon icon={solid("right-left")} className="text-primary me-1" /> Reverse the word (ex. FREE &rarr; REEF)</li>
+      </ul>
       <p>
         For example, to here's how you might convert the word "WRONG" to the word "RIGHT."
       </p>
