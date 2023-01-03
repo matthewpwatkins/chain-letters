@@ -51,9 +51,14 @@ const App = () => {
     };
 
     const load = async () => {
+      const pathComponents = window.location.pathname.split('/').filter(c => c?.trim()?.length);
+      const pathPuzzleID = pathComponents.length ? parseInt(pathComponents[pathComponents.length - 1]) : undefined;
       const nowLocal = new Date();
       const comparisonUtc = Date.parse(`${getShortDateString(nowLocal)}T00:00:00Z`);
-      const puzzleID = Math.round((comparisonUtc - START_DATE_UTC) / MS_IN_DAY) + 1;
+      const currentPuzzleID = Math.round((comparisonUtc - START_DATE_UTC) / MS_IN_DAY) + 1;
+      const canSeeFuture = new URL(window.location).searchParams.has('future');
+      const isRequestForFuture = pathPuzzleID && pathPuzzleID > currentPuzzleID;
+      const puzzleID = pathPuzzleID && (!isRequestForFuture || canSeeFuture) ? pathPuzzleID : currentPuzzleID;
 
       const mUserPreferences = getUserPreferences();
       const mUserPuzzle = await getUserPuzzle(puzzleID);
@@ -187,7 +192,7 @@ const App = () => {
   }
 
   const generateSolutionUrl = async () => {
-    let longURL = `https://chainlettersgame.com/solution?id=${userPuzzle.definition.id}&words=`;
+    let longURL = `${window.location.origin}/solution?id=${userPuzzle.definition.id}&words=`;
     let isFirst = true;
     for (const linkWord of activeLevelAttemptLinkWords) {
       if (!isFirst) {
@@ -197,6 +202,7 @@ const App = () => {
       isFirst = false;
     }
 
+    console.log('Long URL', longURL);
     const encodedParams = new URLSearchParams();
     encodedParams.append("url", longURL);
 

@@ -25,7 +25,7 @@ const SolutionApp = (props) => {
 
   return <><Container fluid className='app-container'>
     <PuzzleHeader puzzleID={props.puzzleID} />
-    <p>This is someone's solution. To play today's puzzle yourself, click <a href="/">here</a>.</p>
+    <p>This is someone's solution. To play this puzzle yourself, click <a href={"/" + props.puzzleID}>here</a>.</p>
     <Card border="primary" className="my-3">
       <ListGroup variant="flush">
         <DefinitionRow
