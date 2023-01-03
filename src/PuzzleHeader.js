@@ -1,4 +1,10 @@
 import Image from 'react-bootstrap/Image';
+import { convertPuzzleIdToDate } from './PuzzleIdUtility';
+
+const formatPuzzleDate = (date) => {
+  const dateComponents = date.toDateString().split(' ');
+  return `${dateComponents[1]} ${dateComponents[2]}, ${dateComponents[3]}`;
+};
 
 export const PuzzleHeader = (props) => <>
   <h1 className="display-5 my-3 text-center">
@@ -12,7 +18,7 @@ export const PuzzleHeader = (props) => <>
   </h1>
   <p className="lead text-center">
     <span>&#x2014;</span>
-    <span className="mx-3">#{props.puzzleID}</span>
+    <span className="mx-3">#{props.puzzleID} &#x2022; {formatPuzzleDate(convertPuzzleIdToDate(props.puzzleID))}</span>
     <span>&#x2014;</span>
   </p>
 </>;
