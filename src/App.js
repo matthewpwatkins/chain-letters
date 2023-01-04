@@ -16,11 +16,13 @@ import { wordExists, wordsAreCloseEnough } from './WordJudge';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { convertDateToPuzzleId } from './PuzzleIdUtility';
+import { getCurrentVersion } from './VersionManager';
 
 const ALPHA_REGEX = /^[a-z]+$/i;
 
 const App = () => {
   // UI state elements
+  const [version, setVersion] = useState(undefined);
   const [inputWord, setInputWord] = useState('');
   const [gameFinished, setGameFinished] = useState(false);
   const [showWinModal, setShowWinModal] = useState(false);
@@ -38,6 +40,7 @@ const App = () => {
 
   useEffect(() => {
     const load = async () => {
+      const mVersion = await getCurrentVersion();
       const pathComponents = window.location.pathname.split('/').filter(c => c?.trim()?.length);
       const pathPuzzleID = pathComponents.length ? parseInt(pathComponents[pathComponents.length - 1]) : undefined;
       const currentPuzzleID = convertDateToPuzzleId(new Date());
@@ -52,6 +55,7 @@ const App = () => {
       const mActiveLevelAttempt = mUserPuzzle.attempt[mActiveLevel] || {};
       mActiveLevelAttempt.link_words = mActiveLevelAttempt.link_words || [mActiveLevelDefinition.source_word];
 
+      setVersion(mVersion);
       setUserPuzzle(mUserPuzzle);
       setActiveLevel(mActiveLevel);
       setActiveLevelDefinition(mActiveLevelDefinition);
@@ -391,7 +395,7 @@ const App = () => {
       {(gameFinished ? (<ShareButton />) : <></>)}
     </Container>
 
-    <Footer />
+    <Footer version={version} />
 
     <WinModal
       show={showWinModal}

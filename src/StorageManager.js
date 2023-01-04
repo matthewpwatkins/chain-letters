@@ -12,7 +12,6 @@ const setLocalStorage = (key, value) => {
 export const getPuzzleDefinition = async (id) => {
   const puzzleFileID = ('' + id).padStart(5, '0');
   const puzzlePath = `${window.location.origin}/puzzle-definitions/${puzzleFileID}.json`;
-  console.log(puzzlePath);
   const res = await fetch(puzzlePath);
   const puzzleDefinition = await res.json();
   return puzzleDefinition.easy ? puzzleDefinition : {

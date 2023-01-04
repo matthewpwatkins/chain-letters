@@ -1,0 +1,1 @@
+git rev-parse --short HEAD > ./public/current-version.txt
