@@ -3,11 +3,12 @@ import Container from 'react-bootstrap/Container';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import Nav from 'react-bootstrap/Nav';
+import { Badge } from 'react-bootstrap';
 
 export const Footer = (props) => {
   return <Container fluid className="app-container footer py-2 mt-auto">
     <p className="text-secondary text-center" style={{ fontSize: "smaller" }}>
-      &copy; {new Date().getFullYear()} Matthew Watkins &#x2022; v{props.version}
+      <Badge bg="light" text="dark" className="me-2">{props.version}</Badge> &copy; {new Date().getFullYear()} Matthew Watkins
     </p>
     <hr />
     <Nav fill>
@@ -22,5 +23,5 @@ export const Footer = (props) => {
         </Nav.Link>
       </Nav.Item>
     </Nav>
-  </Container>;
+  </Container >;
 };
