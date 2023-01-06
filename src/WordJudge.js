@@ -130,7 +130,7 @@ export const wordExists = async (word) => {
   if (frequencyRes.ok) {
     // Return frequency
     const frequencyResObject = await frequencyRes.json();
-    return frequencyResObject.totalCount > 0;
+    return frequencyResObject.totalCount > 50;
   } else {
     console.error(`${frequencyRes.status}`);
   }
