@@ -120,23 +120,24 @@ export const wordsAreCloseEnough = (a, b) => {
 };
 
 export const wordExists = async (word) => {
-  const res = await fetch(`https://cdn.jsdelivr.net/gh/TodoCleverNameHere/valid-words@master/en_US/${word}.json`);
-  if (!res.ok) {
-    return false;
-  }
-
-  const frequencyURL = `https://api.wordnik.com/v4/word.json/${word}/frequency?useCanonical=false&startYear=2012&endYear=2012&api_key=c23b746d074135dc9500c0a61300a3cb7647e53ec2b9b658e`;
+  const frequencyURL = `https://api.wordnik.com/v4/word.json/${word}/frequency?useCanonical=false&startYear=1950&api_key=c23b746d074135dc9500c0a61300a3cb7647e53ec2b9b658e`;
   const frequencyRes = await fetch(frequencyURL);
   if (frequencyRes.status === 404) {
     // 0 usage
     return false;
   }
 
-  if (!frequencyRes.ok) {
-    // No parsable response, assume it's real
-    return true;
+  if (frequencyRes.ok) {
+    // Return frequency
+    const frequencyResObject = await frequencyRes.json();
+    return frequencyResObject.totalCount > 0;
+  } else {
+    console.error(`${frequencyRes.status}`);
   }
 
-  const frequencyResObject = await frequencyRes.json();
-  return frequencyResObject.totalCount > 0;
+  // Fallback to a dictionary
+  const res = await fetch(`https://cdn.jsdelivr.net/gh/TodoCleverNameHere/valid-words@master/en_US/${word}.json`);
+  if (!res.ok) {
+    return false;
+  }
 };
