@@ -119,25 +119,51 @@ export const wordsAreCloseEnough = (a, b) => {
   return false;
 };
 
-export const wordExists = async (word) => {
+const getWordnikDefinitionCount = async (word) => {
+  const definitionURL = `https://api.wordnik.com/v4/word.json/${word}/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key=c23b746d074135dc9500c0a61300a3cb7647e53ec2b9b658e`;
+  const definitionRes = await fetch(definitionURL);
+  if (definitionRes.status === 404) {
+    return 0;
+  }
+  if (definitionRes.ok) {
+    const wordnikDefinitions = await definitionRes.json();
+    return wordnikDefinitions.length;
+  }
+  return undefined;
+};
+
+const getWordnikFrequenciesCount = async (word) => {
   const frequencyURL = `https://api.wordnik.com/v4/word.json/${word}/frequency?useCanonical=false&startYear=1950&api_key=c23b746d074135dc9500c0a61300a3cb7647e53ec2b9b658e`;
   const frequencyRes = await fetch(frequencyURL);
   if (frequencyRes.status === 404) {
-    // 0 usage
-    return false;
+    return 0;
   }
-
   if (frequencyRes.ok) {
-    // Return frequency
-    const frequencyResObject = await frequencyRes.json();
-    return frequencyResObject.totalCount >= 200;
-  } else {
-    console.error(`${frequencyRes.status}`);
+    const wordnikFrequencies = await frequencyRes.json();
+    return wordnikFrequencies.totalCount;
   }
+  return undefined;
+};
 
-  // Fallback to a dictionary
+const wordExistsInPermissiveWordList = async (word) => {
   const res = await fetch(`https://cdn.jsdelivr.net/gh/TodoCleverNameHere/valid-words@master/en_US/${word}.json`);
-  if (!res.ok) {
+  return res.ok;
+}
+
+export const wordExists = async (word) => {
+  const wordnikDefinitionCount = await getWordnikDefinitionCount(word);
+  if (wordnikDefinitionCount !== undefined && wordnikDefinitionCount < 3) {
     return false;
   }
+
+  const wordnikFrequencyCount = await getWordnikFrequenciesCount(word);
+  if (wordnikFrequencyCount !== undefined && wordnikFrequencyCount < 200) {
+    return false;
+  }
+
+  if (wordnikFrequencyCount !== undefined && wordnikDefinitionCount !== undefined) {
+    return true;
+  }
+
+  return await wordExistsInPermissiveWordList(word);
 };
