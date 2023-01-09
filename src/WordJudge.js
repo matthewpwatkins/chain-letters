@@ -157,7 +157,7 @@ export const wordExists = async (word) => {
   }
 
   const wordnikFrequencyCount = await getWordnikFrequenciesCount(word);
-  if (wordnikFrequencyCount !== undefined && wordnikFrequencyCount < 200) {
+  if (wordnikFrequencyCount !== undefined && wordnikFrequencyCount < 100) {
     return false;
   }
 
