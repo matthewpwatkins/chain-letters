@@ -119,15 +119,49 @@ export const wordsAreCloseEnough = (a, b) => {
   return false;
 };
 
+const LABEL_TEXTS_TO_IGNORE = new Set(['obsolete', 'slang', 'dialect']);
+
+const isAcceptableDefinition = (definition) => {
+  console.log('isAcceptableDefinition', definition);
+  if (!definition.text) {
+    return false;
+  }
+
+  const lowerCaseDefinition = definition.text.toLocaleLowerCase();
+  if (lowerCaseDefinition.startsWith("obsolete ")) {
+    return false;
+  }
+  if (lowerCaseDefinition.startsWith("an obsolete form of ")) {
+    return false;
+  }
+  if (lowerCaseDefinition.indexOf("dialectal ") >= 0) {
+    return false;
+  }
+
+  if (definition.labels) {
+    for (const label of definition.labels) {
+      if (LABEL_TEXTS_TO_IGNORE.has(label)) {
+        console.log("label " + label);
+        return false;
+      }
+    }
+  }
+
+  return true;
+};
+
 const getWordnikDefinitionCount = async (word) => {
   const definitionURL = `https://api.wordnik.com/v4/word.json/${word}/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key=c23b746d074135dc9500c0a61300a3cb7647e53ec2b9b658e`;
   const definitionRes = await fetch(definitionURL);
   if (definitionRes.status === 404) {
     return 0;
   }
+
   if (definitionRes.ok) {
     const wordnikDefinitions = await definitionRes.json();
-    return wordnikDefinitions.length;
+    return wordnikDefinitions
+      .filter(isAcceptableDefinition)
+      .length;
   }
   return undefined;
 };
@@ -152,12 +186,14 @@ const wordExistsInPermissiveWordList = async (word) => {
 
 export const wordExists = async (word) => {
   const wordnikDefinitionCount = await getWordnikDefinitionCount(word);
-  if (wordnikDefinitionCount !== undefined && wordnikDefinitionCount < 1) {
+  if (wordnikDefinitionCount !== undefined && wordnikDefinitionCount < 3) {
+    console.log("Not enough definitions: " + wordnikDefinitionCount);
     return false;
   }
 
   const wordnikFrequencyCount = await getWordnikFrequenciesCount(word);
   if (wordnikFrequencyCount !== undefined && wordnikFrequencyCount < 100) {
+    console.log("Not enough frequency: " + wordnikFrequencyCount);
     return false;
   }
 
