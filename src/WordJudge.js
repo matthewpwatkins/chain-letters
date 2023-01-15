@@ -186,7 +186,7 @@ const wordExistsInPermissiveWordList = async (word) => {
 
 export const wordExists = async (word) => {
   const wordnikDefinitionCount = await getWordnikDefinitionCount(word);
-  if (wordnikDefinitionCount !== undefined && wordnikDefinitionCount < 3) {
+  if (wordnikDefinitionCount !== undefined && wordnikDefinitionCount < 1) {
     console.log("Not enough definitions: " + wordnikDefinitionCount);
     return false;
   }
