@@ -11,19 +11,23 @@ import Modal from 'react-bootstrap/Modal';
 import { Footer } from './Footer';
 import { PuzzleHeader } from './PuzzleHeader';
 import { getUserPuzzle, storeUserPuzzle, getUserPreferences, storeUserPreferences } from './StorageManager';
-import { wordExists, wordsAreCloseEnough } from './WordJudge';
+import { defineWord, wordsAreCloseEnough } from './WordJudge';
 // https://fontawesome.com/docs/web/use-with/react/add-icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { convertDateToPuzzleId } from './PuzzleIdUtility';
 import { getCurrentVersion } from './VersionManager';
+import { Alert } from 'react-bootstrap';
 
 const ALPHA_REGEX = /^[a-z]+$/i;
+
+const last = (arr) => arr[arr.length - 1];
 
 const App = () => {
   // UI state elements
   const [version, setVersion] = useState(undefined);
   const [inputWord, setInputWord] = useState('');
+  const [submittedWordDefinition, setSubmittedWordDefinition] = useState(undefined);
   const [gameFinished, setGameFinished] = useState(false);
   const [showWinModal, setShowWinModal] = useState(false);
   const [showHelpModal, setShowHelpModal] = useState(false);
@@ -95,7 +99,8 @@ const App = () => {
         return;
       }
 
-      if (!(await wordExists(sanitizedInputWord))) {
+      const definitions = await defineWord(sanitizedInputWord);
+      if (!(definitions)) {
         setAddWordMessage("That word doesn't exist in the game dictionary.");
         return;
       }
@@ -110,6 +115,8 @@ const App = () => {
           return up;
         });
         setInputWord("");
+        console.log(definitions);
+        setSubmittedWordDefinition(definitions[0]);
         if (sanitizedInputWord === activeLevelDefinition.destination_word) {
           setGameFinished(true);
           setShowWinModal(true);
@@ -142,6 +149,7 @@ const App = () => {
       setGameFinished(false);
       return w;
     })
+    setSubmittedWordDefinition(undefined);
   }
 
   const getEmojiDigit = (digit) => {
@@ -356,6 +364,16 @@ const App = () => {
     </Modal.Footer>
   </Modal>;
 
+  const stripXml = (text) => {
+    return text.replace(/<[^>]+>([^<]+)<\/[^>]+>/g, "$1")
+  }
+
+  const DefinitionCard = (props) => <Alert variant="info">
+    <strong>{props.definition.word}</strong> {props.definition.partOfSpeech ? (<>({last(props.definition.partOfSpeech.split(' '))})</>) : (<></>)}
+    <br />{stripXml(props.definition.text)}
+    {props.definition.exampleUses?.length ? (<><br />Ex: <em>{stripXml(props.definition.exampleUses[0].text)}</em></>) : (<></>)}
+  </Alert>
+
   return (userPuzzle ? (<>
     <Container fluid className='app-container'>
       <PuzzleHeader puzzleID={userPuzzle.definition.id} />
@@ -391,6 +409,8 @@ const App = () => {
           )}
         </ListGroup>
       </Card>
+
+      {(submittedWordDefinition ? (<DefinitionCard definition={submittedWordDefinition}></DefinitionCard>) : <></>)}
 
       {(gameFinished ? (<ShareButton />) : <></>)}
     </Container>

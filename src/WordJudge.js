@@ -119,7 +119,7 @@ export const wordsAreCloseEnough = (a, b) => {
   return false;
 };
 
-const LABEL_TEXTS_TO_IGNORE = new Set(['obsolete', 'slang', 'dialect', 'obs', 'obs.', 'obs. or prov. eng.', 'archaic']);
+const LABEL_TEXTS_TO_IGNORE = new Set(['obsolete', 'slang', 'dialect', 'obs', 'obs.', 'prov. eng.', 'obs. or prov. eng.', 'archaic']);
 
 const isAcceptableDefinition = (definition) => {
   if (!definition.text) {
@@ -157,20 +157,50 @@ const isAcceptableDefinition = (definition) => {
   return true;
 };
 
-const getWordnikDefinitionCount = async (word) => {
+const compareDefinition = (def1, def2) => {
+  if (def1.exampleUses?.length) {
+    if (def2.exampleUses?.length) {
+      return def2.exampleUses.length - def1.exampleUses.length;
+    }
+    return -1;
+  } else if (def2.exampleUses?.length) {
+    return 1;
+  }
+
+  if (def1.sequence) {
+    if (def2.sequence) {
+      return parseInt(def1.sequence) - parseInt(def2.sequence);
+    } else {
+      return -1;
+    }
+  } else {
+    if (def2.sequence) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+};
+
+const getWordnikDefinitions = async (word) => {
   const definitionURL = `https://api.wordnik.com/v4/word.json/${word}/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key=c23b746d074135dc9500c0a61300a3cb7647e53ec2b9b658e`;
   const definitionRes = await fetch(definitionURL);
   if (definitionRes.status === 404) {
     return 0;
   }
 
-  if (definitionRes.ok) {
-    const wordnikDefinitions = await definitionRes.json();
-    return wordnikDefinitions
-      .filter(isAcceptableDefinition)
-      .length;
+  if (!definitionRes.ok) {
+    return undefined;
   }
-  return undefined;
+
+  const wordnikDefinitions = await definitionRes.json();
+  return wordnikDefinitions
+    .filter(isAcceptableDefinition)
+    .map(d => {
+      d.exampleUses = d.exampleUses?.filter(u => u.text.indexOf(d.word) >= 0);
+      return d;
+    })
+    .sort(compareDefinition);
 };
 
 const getWordnikFrequenciesCount = async (word) => {
@@ -191,10 +221,10 @@ const wordExistsInPermissiveWordList = async (word) => {
   return res.ok;
 }
 
-export const wordExists = async (word) => {
-  const wordnikDefinitionCount = await getWordnikDefinitionCount(word);
-  if (wordnikDefinitionCount !== undefined && wordnikDefinitionCount < 1) {
-    console.log("Not enough definitions: " + wordnikDefinitionCount);
+export const defineWord = async (word) => {
+  const existsInPermissiveWordList = await wordExistsInPermissiveWordList(word);
+  if (!existsInPermissiveWordList) {
+    console.log("Not in the permissive list");
     return false;
   }
 
@@ -204,5 +234,11 @@ export const wordExists = async (word) => {
     return false;
   }
 
-  return await wordExistsInPermissiveWordList(word);
+  const wordnikDefinitions = await getWordnikDefinitions(word);
+  if (wordnikDefinitions?.length === 0) {
+    console.log("Not enough definitions: " + wordnikDefinitions.length);
+    return false;
+  }
+
+  return wordnikDefinitions;
 };
