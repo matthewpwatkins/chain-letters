@@ -1,0 +1,15 @@
+{
+  "source_word": "screw",
+  "destination_word": "driver",
+  "best_path": [
+    "screw",
+    "crews",
+    "crows",
+    "crops",
+    "drops",
+    "drips",
+    "dries",
+    "drier",
+    "driver"
+  ]
+}

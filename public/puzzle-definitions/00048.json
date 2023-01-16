@@ -1,4 +1,13 @@
 {
   "source_word": "back",
-  "destination_word": "forth"
+  "destination_word": "forth",
+  "best_path": [
+    "back",
+    "bark",
+    "bar",
+    "far",
+    "for",
+    "fort",
+    "forth"
+  ]
 }

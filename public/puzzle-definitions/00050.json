@@ -1,0 +1,13 @@
+{
+  "source_word": "cell",
+  "destination_word": "phone",
+  "best_path": [
+    "cell",
+    "dell",
+    "doll",
+    "dole",
+    "done",
+    "hone",
+    "phone"
+  ]
+}
