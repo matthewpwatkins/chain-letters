@@ -119,29 +119,36 @@ export const wordsAreCloseEnough = (a, b) => {
   return false;
 };
 
-const LABEL_TEXTS_TO_IGNORE = new Set(['obsolete', 'slang', 'dialect']);
+const LABEL_TEXTS_TO_IGNORE = new Set(['obsolete', 'slang', 'dialect', 'obs', 'obs.', 'obs. or prov. eng.', 'archaic']);
 
 const isAcceptableDefinition = (definition) => {
-  console.log('isAcceptableDefinition', definition);
   if (!definition.text) {
+    return false;
+  }
+  if (definition.text === "abbreviation") {
     return false;
   }
 
   const lowerCaseDefinition = definition.text.toLocaleLowerCase();
   if (lowerCaseDefinition.startsWith("obsolete ")) {
     return false;
-  }
-  if (lowerCaseDefinition.startsWith("an obsolete form of ")) {
+  } else if (lowerCaseDefinition.startsWith("<xref>acronym</xref> ")) {
     return false;
-  }
-  if (lowerCaseDefinition.indexOf("dialectal ") >= 0) {
+  } else if (lowerCaseDefinition.startsWith("acronym ")) {
+    return false;
+  } else if (lowerCaseDefinition.startsWith("archaic ")) {
+    return false;
+  } else if (lowerCaseDefinition.indexOf("dialectal ") >= 0) {
     return false;
   }
 
   if (definition.labels) {
     for (const label of definition.labels) {
-      if (LABEL_TEXTS_TO_IGNORE.has(label)) {
-        console.log("label " + label);
+      if (LABEL_TEXTS_TO_IGNORE.has(label.text.toLocaleLowerCase())) {
+        return false;
+      } else if (label.type === "region" && label.text !== "US") {
+        return false;
+      } else if (label.type === "field") {
         return false;
       }
     }
@@ -195,10 +202,6 @@ export const wordExists = async (word) => {
   if (wordnikFrequencyCount !== undefined && wordnikFrequencyCount < 100) {
     console.log("Not enough frequency: " + wordnikFrequencyCount);
     return false;
-  }
-
-  if (wordnikFrequencyCount !== undefined && wordnikDefinitionCount !== undefined) {
-    return true;
   }
 
   return await wordExistsInPermissiveWordList(word);
