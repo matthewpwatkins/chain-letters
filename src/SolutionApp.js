@@ -7,6 +7,7 @@ import { Footer } from './Footer';
 // https://fontawesome.com/docs/web/use-with/react/add-icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { Alert } from 'react-bootstrap';
 
 const SolutionApp = (props) => {
   // TODO: rename / move these components and dedupe
@@ -25,7 +26,9 @@ const SolutionApp = (props) => {
 
   return <><Container fluid className='app-container'>
     <PuzzleHeader puzzleID={props.puzzleID} />
-    <p>This is someone's solution. To play this puzzle yourself, click <a href={"/" + props.puzzleID}>here</a>.</p>
+    <Alert variant='warning' className="my-2">
+      This is someone's solution. To play this puzzle yourself, click <a href={"/" + props.puzzleID}>here</a>.
+    </Alert>
     <Card border="primary" className="my-3">
       <ListGroup variant="flush">
         <DefinitionRow
