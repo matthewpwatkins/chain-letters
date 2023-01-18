@@ -350,7 +350,7 @@ const App = () => {
       <p className="text-center">
         <Image fluid src="https://chainlettersgame.com/example.jpg" className="text-center" />
       </p>
-      <p>The badge at the top shows you the difficulty level of the puzzle and the shortest number of links it can be solved in.</p>
+      <p>The badge at the top shows you the difficulty level of the puzzle and the shortest number of links it can be solved using common words.</p>
       <p>
         Click the revert icon <FontAwesomeIcon icon={solid("clock-rotate-left")} className="text-primary mx-1" />
         to reset your work to that word and try again from there.

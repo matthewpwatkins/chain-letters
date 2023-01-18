@@ -1,0 +1,18 @@
+{
+  "source_word": "stresses",
+  "destination_word": "bleeds",
+  "best_path": [
+    "stresses",
+    "stressed",
+    "desserts",
+    "deserts",
+    "desert",
+    "deters",
+    "deter",
+    "deer",
+    "reed",
+    "breed",
+    "bleed",
+    "bleeds"
+  ]
+}
