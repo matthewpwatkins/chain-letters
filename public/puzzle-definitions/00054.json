@@ -1,0 +1,14 @@
+{
+  "source_word": "start",
+  "destination_word": "finish",
+  "best_path": [
+    "start",
+    "star",
+    "rats",
+    "fats",
+    "fans",
+    "fins",
+    "finis",
+    "finish"
+  ]
+}

@@ -8,7 +8,7 @@ const formatPuzzleDate = (date) => {
 };
 
 export const PuzzleHeader = (props) => {
-  const difficulty = props.points >= 12 ? 'hard' : (props.points >= 8 ? 'medium' : 'easy');
+  const difficulty = props.points >= 16 ? "insane" : (props.points >= 12 ? 'hard' : (props.points >= 8 ? 'medium' : 'easy'));
   const bgClass = props.points >= 12 ? 'danger' : (props.points >= 8 ? 'warning' : 'success');
   const detailsClassName = `lead${props.points ? " d-flex me-auto" : ""}`;
   const textClassName = props.points ? "me-auto" : "";

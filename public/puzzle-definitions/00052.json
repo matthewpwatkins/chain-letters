@@ -1,0 +1,11 @@
+{
+  "source_word": "door",
+  "destination_word": "mat",
+  "best_path": [
+    "door",
+    "moor",
+    "moot",
+    "moat",
+    "mat"
+  ]
+}

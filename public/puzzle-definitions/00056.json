@@ -1,0 +1,12 @@
+{
+  "source_word": "hand",
+  "destination_word": "full",
+  "best_path": [
+    "hand",
+    "band",
+    "bald",
+    "ball",
+    "bull",
+    "full"
+  ]
+}

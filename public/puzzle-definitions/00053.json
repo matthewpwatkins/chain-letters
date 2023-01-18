@@ -1,0 +1,13 @@
+{
+  "source_word": "butt",
+  "destination_word": "chair",
+  "best_path": [
+    "butt",
+    "but",
+    "bat",
+    "bar",
+    "car",
+    "char",
+    "chair"
+  ]
+}
