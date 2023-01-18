@@ -1,0 +1,15 @@
+{
+  "source_word": "shade",
+  "destination_word": "color",
+  "best_path": [
+    "shade",
+    "share",
+    "hare",
+    "care",
+    "core",
+    "corn",
+    "coon",
+    "colon",
+    "color"
+  ]
+}

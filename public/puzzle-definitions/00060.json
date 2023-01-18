@@ -1,0 +1,14 @@
+{
+  "source_word": "gold",
+  "destination_word": "plates",
+  "best_path": [
+    "gold",
+    "god",
+    "got",
+    "lot",
+    "lots",
+    "plots",
+    "plats",
+    "plates"
+  ]
+}

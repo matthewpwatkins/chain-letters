@@ -1,0 +1,17 @@
+{
+  "source_word": "hobby",
+  "destination_word": "career",
+  "best_path": [
+    "hobby",
+    "bobby",
+    "booby",
+    "boob",
+    "bob",
+    "cob",
+    "cab",
+    "car",
+    "care",
+    "carer",
+    "career"
+  ]
+}

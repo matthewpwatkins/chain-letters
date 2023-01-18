@@ -1,0 +1,12 @@
+{
+  "source_word": "seer",
+  "destination_word": "stones",
+  "best_path": [
+    "seer",
+    "sees",
+    "tees",
+    "toes",
+    "tones",
+    "stones"
+  ]
+}

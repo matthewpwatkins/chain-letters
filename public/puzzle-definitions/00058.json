@@ -1,0 +1,15 @@
+{
+  "source_word": "dare",
+  "destination_word": "right",
+  "best_path": [
+    "dare",
+    "dire",
+    "die",
+    "din",
+    "sin",
+    "sign",
+    "sigh",
+    "sight",
+    "right"
+  ]
+}

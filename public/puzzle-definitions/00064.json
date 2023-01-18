@@ -1,0 +1,14 @@
+{
+  "source_word": "kitten",
+  "destination_word": "cat",
+  "best_path": [
+    "kitten",
+    "bitten",
+    "bitter",
+    "biter",
+    "bite",
+    "bit",
+    "bat",
+    "cat"
+  ]
+}

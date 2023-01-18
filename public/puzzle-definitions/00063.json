@@ -1,0 +1,12 @@
+{
+  "source_word": "danger",
+  "destination_word": "zone",
+  "best_path": [
+    "danger",
+    "dinger",
+    "diner",
+    "dine",
+    "done",
+    "zone"
+  ]
+}

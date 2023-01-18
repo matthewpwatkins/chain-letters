@@ -1,0 +1,12 @@
+{
+  "source_word": "fall",
+  "destination_word": "sleep",
+  "best_path": [
+    "fall",
+    "fell",
+    "feel",
+    "peel",
+    "peels",
+    "sleep"
+  ]
+}

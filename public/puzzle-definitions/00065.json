@@ -1,0 +1,14 @@
+{
+  "source_word": "puppy",
+  "destination_word": "dog",
+  "best_path": [
+    "puppy",
+    "poppy",
+    "poopy",
+    "poop",
+    "poo",
+    "boo",
+    "bog",
+    "dog"
+  ]
+}
