@@ -119,7 +119,7 @@ export const wordsAreCloseEnough = (a, b) => {
   return false;
 };
 
-const LABEL_TEXTS_TO_IGNORE = new Set(['obsolete', 'slang', 'dialect', 'obs', 'obs.', 'prov. eng.', 'obs. or prov. eng.', 'archaic']);
+const LABEL_TEXTS_TO_IGNORE = new Set(['obsolete', 'slang', 'urban', 'informal', 'dialect', 'obs', 'obs.', 'prov. eng.', 'obs. or prov. eng.', 'archaic']);
 
 const isAcceptableDefinition = (definition) => {
   if (!definition.text) {
@@ -198,6 +198,12 @@ const getWordnikDefinitions = async (word) => {
     .filter(isAcceptableDefinition)
     .map(d => {
       d.exampleUses = d.exampleUses?.filter(u => u.text.indexOf(d.word) >= 0);
+      if (!d.exampleUses?.length) {
+        d.exampleUses = d.citations?.filter(c => c.cite?.indexOf(d.word) >= 0)
+          .map(c => {
+            return { text: c.cite };
+          });
+      }
       return d;
     })
     .sort(compareDefinition);

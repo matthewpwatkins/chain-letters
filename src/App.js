@@ -18,6 +18,7 @@ import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { convertDateToPuzzleId } from './PuzzleIdUtility';
 import { getCurrentVersion } from './VersionManager';
 import { Alert } from 'react-bootstrap';
+import Confetti from 'react-confetti';
 
 const ALPHA_REGEX = /^[a-z]+$/i;
 
@@ -222,7 +223,9 @@ const App = () => {
     const link = await generateSolutionUrl();
     const text = `#chainletters puzzle #${userPuzzle.definition.id}`
       + `\nI turned ${activeLevelDefinition.source_word.toUpperCase()} into ${activeLevelDefinition.destination_word.toUpperCase()}`
-      + `\nin ${getEmojiNumber(activeLevelAttemptLinkWords.length)} moves.`;
+      + `\nin ${getEmojiNumber(activeLevelAttemptLinkWords.length)} moves`
+      + (activeLevelAttemptLinkWords.length <= activeLevelDefinition.best_path.length ? ", a perfect score!"
+        : `.\nCan you get a perfect score of ${activeLevelDefinition.best_path.length}?`);
 
     navigator.clipboard.writeText(text + `\n${link}`);
     let shared = false;
@@ -292,27 +295,49 @@ const App = () => {
     </Button>
   </div>
 
-  const WinModal = (props) => <Modal show={props.show} fullscreen="sm-down" centered onHide={() => setShowWinModal(false)}>
-    <Modal.Header closeButton>
-      <Modal.Title>🎉 You won!</Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
-      <p>
-        You chained <span className="link-word text-primary px-1">{props.sourceWord}</span>
-        &rarr; <span className="link-word text-success px-1">{props.destinationWord}</span>
-        using <strong>{props.chainLength}</strong> links.
-      </p>
-      {(navigator.canShare ? (<>
-        <p>Share your results with your friends!</p>
-        <ShareButton />
-      </>) : (<></>))}
-    </Modal.Body>
-    <Modal.Footer>
-      <Button variant="secondary" onClick={() => setShowWinModal(false)}>
-        Back to game
-      </Button>
-    </Modal.Footer>
-  </Modal>;
+  const WinModal = (props) => {
+    const isPerfect = props.chainLength <= activeLevelDefinition.best_path.length;
+    const title = isPerfect ? "💯 PERFECT!" : "🎉 Good job!!";
+    return <>
+      {props.show && isPerfect ? <Confetti
+        width={window.innerWidth}
+        height={window.innerHeight}
+        numberOfPieces={50}
+        initialVelocityY={0}
+        gravity={0.2}
+        recycle={false}
+      /> : <></>}
+      <Modal show={props.show} centered onHide={() => setShowWinModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>{title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>
+            You chained <span className="link-word text-primary px-1">{props.sourceWord}</span>
+            &rarr; <span className="link-word text-success px-1">{props.destinationWord}</span>
+            {isPerfect ? "getting a perfect score of " : "using "}
+            <strong>{props.chainLength}</strong> links{isPerfect ? '!' : '.'} Share your results with your friends!
+          </p>
+          <ShareButton />
+          {isPerfect ? <></> : <>
+            <p className="mt-2">
+              Or give it another shot and see if you can get a perfect score of <strong>{activeLevelDefinition.best_path.length}</strong>:
+            </p>
+            <div className="d-grid gap-2">
+              <Button variant="primary" size="lg" onClick={() => setShowWinModal(false)}>
+                Try again
+              </Button>
+            </div>
+          </>}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowWinModal(false)}>
+            Back to game
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>;
+  };
 
   const HelpModal = (props) => <Modal show={props.show} fullscreen="sm-down" centered onHide={() => setShowHelpModal(false)}>
     <Modal.Header closeButton>
@@ -422,6 +447,7 @@ const App = () => {
 
     <WinModal
       show={showWinModal}
+      perfect={activeLevelAttemptLinkWords.length <= activeLevelDefinition.best_path.length}
       sourceWord={activeLevelDefinition.source_word}
       destinationWord={activeLevelDefinition.destination_word}
       chainLength={activeLevelAttemptLinkWords.length}
