@@ -425,6 +425,7 @@ const App = () => {
             <ListGroup.Item>
               <div className="d-flex gap-2">
                 <Form.Control
+                  readOnly={addWordInProgress}
                   className="m-0"
                   value={inputWord}
                   placeholder="Next word..."
