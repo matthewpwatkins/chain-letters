@@ -411,6 +411,9 @@ const App = () => {
             sourceWord={activeLevelDefinition.source_word}
             destinationWord={activeLevelDefinition.destination_word}
           />
+          {activeLevelDefinition.phrase ? <ListGroup.Item variant='info' className="text-center">
+            <span>{activeLevelDefinition.phrase}</span>
+          </ListGroup.Item> : <></>}
           {activeLevelAttemptLinkWords.map((linkWord, index) => <LinkWordRow
             key={linkWord}
             index={index}
