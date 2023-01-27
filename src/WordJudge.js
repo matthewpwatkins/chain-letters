@@ -148,7 +148,7 @@ const isAcceptableDefinition = (definition) => {
         return false;
       } else if (label.type === "region" && label.text !== "US") {
         return false;
-      } else if (label.type === "field") {
+      } else if (label.type === "field" || label.type === "fld") {
         return false;
       }
     }
@@ -194,7 +194,7 @@ const getWordnikDefinitions = async (word) => {
   }
 
   const wordnikDefinitions = await definitionRes.json();
-  return wordnikDefinitions
+  const acceptableDefinitions = wordnikDefinitions
     .filter(isAcceptableDefinition)
     .map(d => {
       d.exampleUses = d.exampleUses?.filter(u => u.text.indexOf(d.word) >= 0);
@@ -207,6 +207,11 @@ const getWordnikDefinitions = async (word) => {
       return d;
     })
     .sort(compareDefinition);
+  return {
+    totalDefinitionCount: wordnikDefinitions.length,
+    acceptableDefinitions: acceptableDefinitions,
+    acceptableDefinitionsPercent: acceptableDefinitions.length / wordnikDefinitions.length
+  };
 };
 
 const getWordnikFrequenciesCount = async (word) => {
@@ -241,9 +246,15 @@ export const defineWord = async (word) => {
   }
 
   const wordnikDefinitions = await getWordnikDefinitions(word);
-  if (wordnikDefinitions?.length === 0) {
-    console.log("Not enough definitions: " + wordnikDefinitions.length);
-    return false;
+  if (wordnikDefinitions) {
+    if (wordnikDefinitions.acceptableDefinitions.length < 3) {
+      console.log("Not enough definitions: " + wordnikDefinitions.length);
+      return false;
+    }
+    if (wordnikDefinitions.totalDefinitionCount > 2 && wordnikDefinitions.acceptableDefinitionsPercent < .5) {
+      console.log(`Low acceptable definition %: ${wordnikDefinitions.acceptableDefinitionsPercent}`);
+      return false;
+    }
   }
 
   return wordnikDefinitions;
