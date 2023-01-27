@@ -140,6 +140,8 @@ const isAcceptableDefinition = (definition) => {
     return false;
   } else if (lowerCaseDefinition.indexOf("dialectal ") >= 0) {
     return false;
+  } else if (lowerCaseDefinition.indexOf('obsolete spelling of ') >= 0) {
+    return false;
   }
 
   if (definition.labels) {
@@ -247,11 +249,11 @@ export const defineWord = async (word) => {
 
   const wordnikDefinitions = await getWordnikDefinitions(word);
   if (wordnikDefinitions) {
-    if (wordnikDefinitions.acceptableDefinitions.length < 3) {
-      console.log("Not enough definitions: " + wordnikDefinitions.length);
+    if (wordnikDefinitions.acceptableDefinitions.length === 0) {
+      console.log("Not enough definitions: " + wordnikDefinitions.acceptableDefinitions.length);
       return false;
     }
-    if (wordnikDefinitions.totalDefinitionCount > 2 && wordnikDefinitions.acceptableDefinitionsPercent < .5) {
+    if (wordnikDefinitions.totalDefinitionCount > 3 && wordnikDefinitions.acceptableDefinitionsPercent < .5) {
       console.log(`Low acceptable definition %: ${wordnikDefinitions.acceptableDefinitionsPercent}`);
       return false;
     }
