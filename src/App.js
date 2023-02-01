@@ -76,6 +76,10 @@ const App = () => {
   }, []);
 
   const submitWord = async () => {
+    if (addWordInProgress) {
+      return;
+    }
+
     const addWord = async () => {
       const sanitizedInputWord = inputWord?.trim().toLocaleLowerCase();
       if (!(sanitizedInputWord?.length)) {
@@ -136,6 +140,10 @@ const App = () => {
   }
 
   const resetTo = (index) => {
+    if (addWordInProgress) {
+      return;
+    }
+
     setActiveLevelAttemptLinkWords(w => {
       w = w.slice(0, index + 1);
       setUserPuzzle(up => {
