@@ -1,0 +1,13 @@
+{
+  "source_word": "hand",
+  "destination_word": "mouth",
+  "best_path": [
+    "hand",
+    "had",
+    "hah",
+    "hath",
+    "math",
+    "moth",
+    "mouth"
+  ]
+}

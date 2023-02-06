@@ -1,0 +1,14 @@
+{
+  "source_word": "come",
+  "destination_word": "senses",
+  "best_path": [
+    "come",
+    "came",
+    "case",
+    "ease",
+    "eases",
+    "leases",
+    "lenses",
+    "senses"
+  ]
+}

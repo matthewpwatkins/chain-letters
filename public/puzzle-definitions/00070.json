@@ -1,0 +1,13 @@
+{
+  "source_word": "take",
+  "destination_word": "shower",
+  "best_path": [
+    "take",
+    "rake",
+    "raker",
+    "rawer",
+    "rower",
+    "sower",
+    "shower"
+  ]
+}

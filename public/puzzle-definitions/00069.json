@@ -1,0 +1,12 @@
+{
+  "source_word": "head",
+  "destination_word": "phones",
+  "best_path": [
+    "head",
+    "heed",
+    "hoed",
+    "hoes",
+    "hones",
+    "phones"
+  ]
+}

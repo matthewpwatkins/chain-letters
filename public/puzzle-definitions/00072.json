@@ -1,0 +1,13 @@
+{
+  "source_word": "what",
+  "destination_word": "ever",
+  "best_path": [
+    "what",
+    "hat",
+    "at",
+    "ate",
+    "ave",
+    "eve",
+    "ever"
+  ]
+}

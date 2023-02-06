@@ -1,0 +1,16 @@
+{
+  "source_word": "dead",
+  "destination_word": "rights",
+  "best_path": [
+    "dead",
+    "dad",
+    "did",
+    "din",
+    "sin",
+    "sign",
+    "sigh",
+    "sighs",
+    "sights",
+    "rights"
+  ]
+}

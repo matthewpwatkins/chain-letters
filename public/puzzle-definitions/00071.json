@@ -1,0 +1,13 @@
+{
+  "source_word": "mouse",
+  "destination_word": "pad",
+  "best_path": [
+    "mouse",
+    "muse",
+    "use",
+    "us",
+    "as",
+    "ad",
+    "pad"
+  ]
+}
