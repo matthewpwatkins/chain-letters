@@ -1,0 +1,11 @@
+{
+  "source_word": "short",
+  "destination_word": "cut",
+  "best_path": [
+    "short",
+    "shot",
+    "hot",
+    "cot",
+    "cut"
+  ]
+}
