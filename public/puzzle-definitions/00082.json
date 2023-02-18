@@ -1,0 +1,10 @@
+{
+  "source_word": "time",
+  "destination_word": "shine",
+  "best_path": [
+    "time",
+    "tine",
+    "sine",
+    "shine"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "source_word": "make",
+  "destination_word": "sicko",
+  "best_path": [
+    "make",
+    "cake",
+    "case",
+    "cask",
+    "sack",
+    "sick",
+    "sicko"
+  ]
+}

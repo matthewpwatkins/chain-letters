@@ -1,0 +1,13 @@
+{
+  "source_word": "merry",
+  "destination_word": "land",
+  "best_path": [
+    "merry",
+    "marry",
+    "harry",
+    "hardy",
+    "hard",
+    "hand",
+    "land"
+  ]
+}

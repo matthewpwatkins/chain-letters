@@ -1,0 +1,16 @@
+{
+  "source_word": "carol",
+  "destination_word": "liner",
+  "best_path": [
+    "carol",
+    "coral",
+    "coal",
+    "coat",
+    "cat",
+    "can",
+    "cane",
+    "lane",
+    "line",
+    "liner"
+  ]
+}

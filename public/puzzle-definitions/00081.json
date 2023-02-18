@@ -1,0 +1,19 @@
+{
+  "source_word": "minute",
+  "destination_word": "hour",
+  "best_path": [
+    "minute",
+    "minutes",
+    "minuses",
+    "misuses",
+    "misses",
+    "mosses",
+    "losses",
+    "loses",
+    "doses",
+    "does",
+    "doer",
+    "dour",
+    "hour"
+  ]
+}

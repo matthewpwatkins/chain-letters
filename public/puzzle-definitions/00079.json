@@ -1,0 +1,13 @@
+{
+  "source_word": "ice",
+  "destination_word": "cream",
+  "best_path": [
+    "ice",
+    "ace",
+    "act",
+    "cat",
+    "cam",
+    "cram",
+    "cream"
+  ]
+}

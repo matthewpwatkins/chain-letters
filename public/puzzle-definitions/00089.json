@@ -1,0 +1,11 @@
+{
+  "source_word": "fee",
+  "destination_word": "nix",
+  "best_path": [
+    "fee",
+    "foe",
+    "fox",
+    "fix",
+    "nix"
+  ]
+}

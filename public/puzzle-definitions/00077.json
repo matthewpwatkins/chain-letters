@@ -1,0 +1,13 @@
+{
+  "source_word": "axe",
+  "destination_word": "timber",
+  "best_path": [
+    "axe",
+    "ale",
+    "tale",
+    "tame",
+    "time",
+    "timer",
+    "timber"
+  ]
+}

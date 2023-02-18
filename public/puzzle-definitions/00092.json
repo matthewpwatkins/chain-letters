@@ -1,0 +1,12 @@
+{
+  "source_word": "ten",
+  "destination_word": "icy",
+  "best_path": [
+    "ten",
+    "tea",
+    "ate",
+    "ace",
+    "ice",
+    "icy"
+  ]
+}

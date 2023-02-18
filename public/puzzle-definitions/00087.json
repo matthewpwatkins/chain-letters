@@ -1,0 +1,14 @@
+{
+  "source_word": "carry",
+  "destination_word": "apex",
+  "best_path": [
+    "carry",
+    "harry",
+    "hardy",
+    "hard",
+    "hare",
+    "are",
+    "ape",
+    "apex"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "source_word": "huh",
+  "destination_word": "why",
+  "best_path": [
+    "huh",
+    "uh",
+    "sh",
+    "shy",
+    "why"
+  ]
+}

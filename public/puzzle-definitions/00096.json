@@ -1,0 +1,12 @@
+{
+  "source_word": "dell",
+  "destination_word": "aware",
+  "best_path": [
+    "dell",
+    "deal",
+    "dear",
+    "dare",
+    "ware",
+    "aware"
+  ]
+}

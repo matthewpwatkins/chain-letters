@@ -1,0 +1,12 @@
+{
+  "source_word": "mark",
+  "destination_word": "rich",
+  "best_path": [
+    "mark",
+    "mare",
+    "care",
+    "race",
+    "rice",
+    "rich"
+  ]
+}

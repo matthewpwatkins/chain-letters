@@ -1,0 +1,16 @@
+{
+  "source_word": "dreary",
+  "destination_word": "bright",
+  "best_path": [
+    "dreary",
+    "deary",
+    "dear",
+    "bear",
+    "beat",
+    "begat",
+    "begot",
+    "bigot",
+    "bight",
+    "bright"
+  ]
+}

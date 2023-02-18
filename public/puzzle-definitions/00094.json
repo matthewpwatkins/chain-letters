@@ -1,0 +1,15 @@
+{
+  "source_word": "washing",
+  "destination_word": "ton",
+  "best_path": [
+    "washing",
+    "bashing",
+    "basing",
+    "baling",
+    "bling",
+    "bing",
+    "bin",
+    "tin",
+    "ton"
+  ]
+}

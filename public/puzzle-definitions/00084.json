@@ -1,0 +1,10 @@
+{
+  "source_word": "red",
+  "destination_word": "green",
+  "best_path": [
+    "red",
+    "reed",
+    "greed",
+    "green"
+  ]
+}

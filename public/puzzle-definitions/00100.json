@@ -1,0 +1,12 @@
+{
+  "source_word": "tech",
+  "destination_word": "sass",
+  "best_path": [
+    "tech",
+    "mech",
+    "mach",
+    "mash",
+    "mass",
+    "sass"
+  ]
+}

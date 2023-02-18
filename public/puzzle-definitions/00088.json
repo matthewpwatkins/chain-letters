@@ -1,0 +1,13 @@
+{
+  "source_word": "gnash",
+  "destination_word": "bill",
+  "best_path": [
+    "gnash",
+    "gash",
+    "gas",
+    "gal",
+    "gall",
+    "ball",
+    "bill"
+  ]
+}

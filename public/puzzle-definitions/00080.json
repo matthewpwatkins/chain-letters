@@ -1,0 +1,13 @@
+{
+  "source_word": "note",
+  "destination_word": "letter",
+  "best_path": [
+    "note",
+    "dote",
+    "date",
+    "late",
+    "later",
+    "latter",
+    "letter"
+  ]
+}

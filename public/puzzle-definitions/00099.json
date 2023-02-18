@@ -1,0 +1,12 @@
+{
+  "source_word": "mini",
+  "destination_word": "soda",
+  "best_path": [
+    "mini",
+    "mind",
+    "mid",
+    "mod",
+    "sod",
+    "soda"
+  ]
+}
