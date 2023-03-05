@@ -104,12 +104,10 @@ const App = () => {
         return;
       }
 
-      if (sanitizedInputWord !== activeLevelDefinition.destination_word) {
-        const definitions = await defineWord(sanitizedInputWord);
-        if (!(definitions)) {
-          setAddWordMessage("That word doesn't exist in the game dictionary.");
-          return;
-        }
+      const definitions = await defineWord(sanitizedInputWord);
+      if (sanitizedInputWord !== activeLevelDefinition.destination_word && !definitions) {
+        setAddWordMessage("That word doesn't exist in the game dictionary.");
+        return;
       }
 
       setActiveLevelAttemptLinkWords(w => {
