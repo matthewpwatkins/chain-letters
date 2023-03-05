@@ -120,8 +120,7 @@ const App = () => {
           return up;
         });
         setInputWord("");
-        console.log(definitions);
-        setSubmittedWordDefinition(definitions[0]);
+        setSubmittedWordDefinition(definitions ? definitions[0] : undefined);
         if (sanitizedInputWord === activeLevelDefinition.destination_word) {
           setGameFinished(true);
           setShowWinModal(true);
