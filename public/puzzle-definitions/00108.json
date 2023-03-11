@@ -1,0 +1,13 @@
+{
+  "source_word": "gorge",
+  "destination_word": "us",
+  "best_path": [
+    "gorge",
+    "gore",
+    "ore",
+    "or",
+    "oh",
+    "uh",
+    "us"
+  ]
+}

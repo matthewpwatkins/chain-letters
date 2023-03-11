@@ -1,0 +1,17 @@
+{
+  "source_word": "sapling",
+  "destination_word": "tree",
+  "best_path": [
+    "sapling",
+    "sailing",
+    "ailing",
+    "riling",
+    "ruling",
+    "ruing",
+    "ruin",
+    "run",
+    "rue",
+    "true",
+    "tree"
+  ]
+}

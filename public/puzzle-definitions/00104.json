@@ -1,0 +1,12 @@
+{
+  "source_word": "wed",
+  "destination_word": "sealed",
+  "best_path": [
+    "wed",
+    "led",
+    "pled",
+    "paled",
+    "pealed",
+    "sealed"
+  ]
+}

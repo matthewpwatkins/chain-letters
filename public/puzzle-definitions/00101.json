@@ -1,0 +1,11 @@
+{
+  "source_word": "duh",
+  "destination_word": "coda",
+  "best_path": [
+    "duh",
+    "dud",
+    "cud",
+    "cod",
+    "coda"
+  ]
+}

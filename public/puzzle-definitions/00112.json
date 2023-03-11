@@ -1,0 +1,14 @@
+{
+  "source_word": "straw",
+  "destination_word": "berry",
+  "best_path": [
+    "straw",
+    "strap",
+    "parts",
+    "party",
+    "parry",
+    "marry",
+    "merry",
+    "berry"
+  ]
+}

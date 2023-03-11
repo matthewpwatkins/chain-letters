@@ -1,0 +1,15 @@
+{
+  "source_word": "spring",
+  "destination_word": "break",
+  "best_path": [
+    "spring",
+    "sprint",
+    "print",
+    "pint",
+    "pent",
+    "bent",
+    "beat",
+    "beak",
+    "break"
+  ]
+}

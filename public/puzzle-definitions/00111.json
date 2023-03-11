@@ -1,0 +1,13 @@
+{
+  "source_word": "can",
+  "destination_word": "elope",
+  "best_path": [
+    "can",
+    "cap",
+    "cop",
+    "lop",
+    "slop",
+    "slope",
+    "elope"
+  ]
+}

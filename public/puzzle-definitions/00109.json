@@ -1,0 +1,11 @@
+{
+  "source_word": "hand",
+  "destination_word": "some",
+  "best_path": [
+    "hand",
+    "sand",
+    "sane",
+    "same",
+    "some"
+  ]
+}

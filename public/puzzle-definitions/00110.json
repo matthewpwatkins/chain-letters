@@ -1,0 +1,12 @@
+{
+  "source_word": "honey",
+  "destination_word": "dew",
+  "best_path": [
+    "honey",
+    "hone",
+    "hoe",
+    "he",
+    "hew",
+    "dew"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "source_word": "split",
+  "destination_word": "stake",
+  "best_path": [
+    "split",
+    "slit",
+    "slat",
+    "stat",
+    "state",
+    "stake"
+  ]
+}

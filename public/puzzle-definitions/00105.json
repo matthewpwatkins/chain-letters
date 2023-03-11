@@ -1,0 +1,11 @@
+{
+  "source_word": "hump",
+  "destination_word": "day",
+  "best_path": [
+    "hump",
+    "hum",
+    "dum",
+    "dam",
+    "day"
+  ]
+}

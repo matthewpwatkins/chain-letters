@@ -1,0 +1,11 @@
+{
+  "source_word": "fire",
+  "destination_word": "place",
+  "best_path": [
+    "fire",
+    "fare",
+    "face",
+    "lace",
+    "place"
+  ]
+}
