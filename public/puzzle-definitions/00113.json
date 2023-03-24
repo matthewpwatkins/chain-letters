@@ -1,0 +1,10 @@
+{
+  "source_word": "ring",
+  "destination_word": "tone",
+  "best_path": [
+    "tone: ring",
+    "ting",
+    "tine",
+    "tone"
+  ]
+}

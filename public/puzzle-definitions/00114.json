@@ -1,0 +1,15 @@
+{
+  "source_word": "court",
+  "destination_word": "jester",
+  "best_path": [
+    "court",
+    "curt",
+    "cart",
+    "cast",
+    "past",
+    "paste",
+    "paster",
+    "pester",
+    "jester"
+  ]
+}
