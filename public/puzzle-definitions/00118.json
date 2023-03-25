@@ -1,0 +1,13 @@
+{
+  "source_word": "lord",
+  "destination_word": "rings",
+  "best_path": [
+    "lord",
+    "ford",
+    "fond",
+    "find",
+    "rind",
+    "ring",
+    "rings"
+  ]
+}

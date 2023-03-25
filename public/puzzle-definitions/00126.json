@@ -1,0 +1,14 @@
+{
+  "source_word": "key",
+  "destination_word": "board",
+  "best_path": [
+    "key",
+    "hey",
+    "hay",
+    "bay",
+    "bad",
+    "bard",
+    "board"
+  ],
+  "phrase": "More like \"bored,\" am I right?"
+}

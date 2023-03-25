@@ -1,0 +1,11 @@
+{
+  "source_word": "wind",
+  "destination_word": "shield",
+  "best_path": [
+    "wind",
+    "hind",
+    "hied",
+    "shied",
+    "shield"
+  ]
+}

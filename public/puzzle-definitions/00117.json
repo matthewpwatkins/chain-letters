@@ -1,0 +1,18 @@
+{
+  "source_word": "birth",
+  "destination_word": "death",
+  "best_path": [
+    "birth",
+    "girth",
+    "girt",
+    "git",
+    "gat",
+    "eat",
+    "heat",
+    "heart",
+    "earth",
+    "dearth",
+    "death"
+  ],
+  "phrase": "And taxes all along the way..."
+}

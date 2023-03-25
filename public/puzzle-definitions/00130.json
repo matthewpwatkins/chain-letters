@@ -1,0 +1,14 @@
+{
+  "source_word": "preach",
+  "destination_word": "dead",
+  "best_path": [
+    "preach",
+    "peach",
+    "each",
+    "mach",
+    "mac",
+    "mad",
+    "dad",
+    "dead"
+  ]
+}

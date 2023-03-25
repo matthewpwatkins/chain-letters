@@ -1,0 +1,13 @@
+{
+  "source_word": "sock",
+  "destination_word": "mate",
+  "best_path": [
+    "sock",
+    "lock",
+    "lack",
+    "lace",
+    "late",
+    "mate"
+  ],
+  "phrase": "8 socks into the dryer, 7 socks out."
+}

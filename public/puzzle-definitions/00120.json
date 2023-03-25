@@ -1,0 +1,15 @@
+{
+  "source_word": "land",
+  "destination_word": "landing",
+  "best_path": [
+    "land",
+    "bland",
+    "blind",
+    "bling",
+    "baling",
+    "balding",
+    "banding",
+    "landing"
+  ],
+  "phrase": "Hint: The pilot landing the plane was blind, so everyone started baling out over the water."
+}

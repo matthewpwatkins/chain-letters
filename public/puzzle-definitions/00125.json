@@ -1,0 +1,16 @@
+{
+  "source_word": "handle",
+  "destination_word": "bars",
+  "best_path": [
+    "handle",
+    "handled",
+    "handed",
+    "banded",
+    "balded",
+    "baled",
+    "bald",
+    "bard",
+    "bars"
+  ],
+  "phrase": "Keep a good grip on this puzzle today."
+}

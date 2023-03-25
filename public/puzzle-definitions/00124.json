@@ -1,0 +1,14 @@
+{
+  "source_word": "glory",
+  "destination_word": "god",
+  "best_path": [
+    "glory",
+    "gory",
+    "gore",
+    "ore",
+    "roe",
+    "rod",
+    "god"
+  ],
+  "phrase": "I love when the choir sings"
+}

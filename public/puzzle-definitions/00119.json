@@ -1,0 +1,12 @@
+{
+  "source_word": "home",
+  "destination_word": "work",
+  "best_path": [
+    "home",
+    "hoe",
+    "woe",
+    "wok",
+    "work"
+  ],
+  "phrase": "Hint: homework is misery and woe, indeed"
+}

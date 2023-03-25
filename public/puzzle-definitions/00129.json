@@ -1,0 +1,13 @@
+{
+  "source_word": "march",
+  "destination_word": "cross",
+  "best_path": [
+    "march",
+    "mach",
+    "mash",
+    "cash",
+    "crash",
+    "crass",
+    "cross"
+  ]
+}

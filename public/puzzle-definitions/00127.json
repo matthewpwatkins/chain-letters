@@ -1,0 +1,13 @@
+{
+  "source_word": "fire",
+  "destination_word": "truck",
+  "best_path": [
+    "fire",
+    "rife",
+    "rice",
+    "trice",
+    "trick",
+    "truck"
+  ],
+  "phrase": "🚒🚒 My 2-year old's favorit puzzle so far 🚒🚒"
+}

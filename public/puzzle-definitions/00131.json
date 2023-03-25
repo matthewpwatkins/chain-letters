@@ -1,0 +1,16 @@
+{
+  "source_word": "death",
+  "destination_word": "life",
+  "best_path": [
+    "death",
+    "dearth",
+    "earth",
+    "heart",
+    "heat",
+    "hate",
+    "late",
+    "lite",
+    "life"
+  ],
+  "phrase": "He lives!"
+}

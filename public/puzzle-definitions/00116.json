@@ -1,0 +1,14 @@
+{
+  "source_word": "throw",
+  "destination_word": "rug",
+  "best_path": [
+    "throw",
+    "threw",
+    "three",
+    "tree",
+    "true",
+    "rue",
+    "rug"
+  ],
+  "phrase": "They're so hard to vaccuum, why do we use them?"
+}

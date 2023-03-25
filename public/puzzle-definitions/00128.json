@@ -1,0 +1,14 @@
+{
+  "source_word": "blue",
+  "destination_word": "tooth",
+  "best_path": [
+    "blue",
+    "blub",
+    "blob",
+    "blot",
+    "boot",
+    "toot",
+    "tooth"
+  ],
+  "phrase": "Sorry, can't hear you, I think it's my headset."
+}
