@@ -1,11 +1,10 @@
 import { Badge } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
-import { convertPuzzleIdToDate } from './PuzzleIdUtility';
 
-const formatPuzzleDate = (date) => {
-  const dateComponents = date.toDateString().split(' ');
-  return `${dateComponents[1]} ${dateComponents[2]}, ${dateComponents[3]}`;
-};
+// const formatPuzzleDate = (date) => {
+//   const dateComponents = date.toDateString().split(' ');
+//   return `${dateComponents[1]} ${dateComponents[2]}, ${dateComponents[3]}`;
+// };
 
 export const PuzzleHeader = (props) => {
   const difficulty = props.points >= 16 ? "insane" : (props.points >= 12 ? 'hard' : (props.points >= 8 ? 'medium' : 'easy'));
