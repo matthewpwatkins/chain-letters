@@ -4,7 +4,8 @@ const addDays = (date, days) => {
   return newDate;
 };
 
-const POINTER_DATE = Date.parse('2023-12-07' + 'T00:00:00Z');
+const POINTER_DATE_STRING = '2023-12-07';
+const POINTER_DATE = Date.parse(POINTER_DATE_STRING + 'T00:00:00Z');
 const POINTER_PUZZLE_ID = 106;
 const START_DATE = addDays(POINTER_DATE, -1 * (POINTER_PUZZLE_ID - 1));
 const PUZZLE_COUNT = parseInt(process.env.REACT_APP_PUZZLE_COUNT);
