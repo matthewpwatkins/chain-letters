@@ -1,0 +1,12 @@
+{
+  "source_word": "chick",
+  "destination_word": "hen",
+  "best_path": [
+    "chick",
+    "chic",
+    "chi",
+    "hi",
+    "he",
+    "hen"
+  ]
+}

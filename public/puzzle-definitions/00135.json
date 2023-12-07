@@ -1,0 +1,13 @@
+{
+  "source_word": "phone",
+  "destination_word": "stand",
+  "best_path": [
+    "phone",
+    "hone",
+    "hon",
+    "son",
+    "san",
+    "sand",
+    "stand"
+  ]
+}

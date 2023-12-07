@@ -1,0 +1,17 @@
+{
+  "source_word": "gallon",
+  "destination_word": "milk",
+  "best_path": [
+    "gallon",
+    "gallop",
+    "wallop",
+    "wallow",
+    "allow",
+    "alloy",
+    "ally",
+    "all",
+    "ill",
+    "ilk",
+    "milk"
+  ]
+}

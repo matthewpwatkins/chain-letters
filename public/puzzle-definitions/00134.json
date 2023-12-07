@@ -1,0 +1,14 @@
+{
+  "source_word": "pipe",
+  "destination_word": "organ",
+  "best_path": [
+    "pipe",
+    "pie",
+    "pin",
+    "gin",
+    "grin",
+    "gran",
+    "groan",
+    "organ"
+  ]
+}
