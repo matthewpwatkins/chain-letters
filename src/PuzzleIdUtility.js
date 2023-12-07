@@ -1,8 +1,18 @@
-// Dec 1, 2022
-const START_DATE_UTC = Date.parse('2022-12-01T00:00:00Z');
-const MS_IN_DAY = 86400000;
-console.log(`Puzzle count: ${process.env.REACT_APP_PUZZLE_COUNT}`);
+const addDays = (date, days) => {
+  const newDate = new Date(date.valueOf());
+  newDate.setDate(newDate.getDate() + days);
+  return newDate;
+};
+
+const POINTER_DATE = Date.parse('2023-12-07' + 'T00:00:00Z');
+const POINTER_PUZZLE_ID = 106;
+const START_DATE = addDays(POINTER_DATE, -1 * (POINTER_PUZZLE_ID - 1));
 const PUZZLE_COUNT = parseInt(process.env.REACT_APP_PUZZLE_COUNT);
+const MS_IN_DAY = 86400000;
+
+const daysBetween = (start, end) => {
+  return Math.floor((end - start) / MS_IN_DAY);
+};
 
 const lPadZeroNumber = (number, length) => {
   return (number + "").padStart(length, "0");
@@ -15,12 +25,12 @@ const getShortDateString = (date) => {
   return `${year}-${month}-${dayOfMonth}`;
 };
 
-export const convertPuzzleIdToDate = (puzzleID) => {
-  return new Date(START_DATE_UTC + ((parseInt(puzzleID) - 1) * MS_IN_DAY));
-};
-
 export const convertDateToPuzzleId = (date) => {
-  const comparisonUtc = Date.parse(`${getShortDateString(date)}T00:00:00Z`);
-  // Modulo rotates the puzzles so that we never fully run out
-  return (Math.round((comparisonUtc - START_DATE_UTC) / MS_IN_DAY) + 1) % (PUZZLE_COUNT + 1);
+  const dateAtStartOfDay = Date.parse(`${getShortDateString(date)}T00:00:00Z`);
+  const daysSinceStartDate = daysBetween(START_DATE, dateAtStartOfDay);
+  let offset = daysSinceStartDate % PUZZLE_COUNT;
+  if (offset < 0) {
+    offset += PUZZLE_COUNT;
+  }
+  return offset + 1;
 };

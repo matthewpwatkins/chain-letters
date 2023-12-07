@@ -24,8 +24,6 @@ export const PuzzleHeader = (props) => {
     <div className={detailsClassName}>
       <div className={textClassName}>
         <span>Puzzle #{props.puzzleID}</span>
-        {/* <span className="mx-1">&#x2022;</span>
-        <span>{formatPuzzleDate(convertPuzzleIdToDate(props.puzzleID))}</span> */}
       </div>
       {props.points ? <Badge bg={bgClass} text="light" className="text-uppercase">{difficulty} &#x2022; {props.points}</Badge> : <></>}
     </div>
