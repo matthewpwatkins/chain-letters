@@ -1,4 +1,5 @@
 {
   "source_word": "weight",
-  "destination_word": "lost"
+  "destination_word": "lost",
+  "best_path": ["weight","eight","sight","sigh","sign","sin","sit","lit","lot","lost"]
 }

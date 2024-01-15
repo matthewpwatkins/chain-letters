@@ -1,4 +1,5 @@
 {
   "source_word": "ghost",
-  "destination_word": "story"
+  "destination_word": "story",
+  "best_path": ["ghost","host","hot","tot","toy","tory","story"]
 }

@@ -1,4 +1,5 @@
 {
   "source_word": "water",
-  "destination_word": "fire"
+  "destination_word": "fire",
+  "best_path": ["water","cater","cate","care","fare","fire"]
 }

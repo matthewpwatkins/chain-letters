@@ -1,4 +1,5 @@
 {
   "source_word": "dumb",
-  "destination_word": "smart"
+  "destination_word": "smart",
+  "best_path": ["dumb","dum","dam","mad","mar","mart","smart"]
 }

@@ -1,4 +1,5 @@
 {
   "source_word": "grape",
-  "destination_word": "raisin"
+  "destination_word": "raisin",
+  "best_path": ["grape","gripe","grip","grin","ring","iring","siring","rising","raising","raisin"]
 }

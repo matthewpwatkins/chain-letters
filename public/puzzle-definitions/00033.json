@@ -1,4 +1,5 @@
 {
   "source_word": "bound",
-  "destination_word": "free"
+  "destination_word": "free",
+  "best_path": ["bound","bond","bod","bed","bee","fee","free"]
 }

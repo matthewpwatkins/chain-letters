@@ -1,4 +1,5 @@
 {
   "source_word": "shaken",
-  "destination_word": "stirred"
+  "destination_word": "stirred",
+  "best_path": ["shaken","shake","share","stare","stared","starred","stirred"]
 }

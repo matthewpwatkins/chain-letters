@@ -1,4 +1,5 @@
 {
   "source_word": "trial",
-  "destination_word": "judge"
+  "destination_word": "judge",
+  "best_path": ["trial","triad","trad","rad","bad","bade","badge","budge","judge"]
 }

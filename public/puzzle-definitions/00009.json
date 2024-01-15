@@ -1,4 +1,5 @@
 {
   "source_word": "love",
-  "destination_word": "hate"
+  "destination_word": "hate",
+  "best_path": ["love","hove","have","hate"]
 }

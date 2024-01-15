@@ -1,4 +1,5 @@
 {
   "source_word": "milk",
-  "destination_word": "cheese"
+  "destination_word": "cheese",
+  "best_path": ["milk","ilk","elk","eek","leek","cleek"]
 }

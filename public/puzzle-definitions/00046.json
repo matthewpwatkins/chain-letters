@@ -1,4 +1,5 @@
 {
   "source_word": "free",
-  "destination_word": "market"
+  "destination_word": "market",
+  "best_path": ["free","freed","breed","bred","bared","barked","marked","market"]
 }

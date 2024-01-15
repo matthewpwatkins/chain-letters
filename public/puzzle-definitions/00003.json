@@ -1,4 +1,5 @@
 {
   "source_word": "torn",
-  "destination_word": "seam"
+  "destination_word": "seam",
+  "best_path": ["torn","tern","term","team","seam"]
 }

@@ -1,4 +1,5 @@
 {
   "source_word": "knees",
-  "destination_word": "toes"
+  "destination_word": "toes",
+  "best_path": ["knees","keens","teens","tees","toes"]
 }

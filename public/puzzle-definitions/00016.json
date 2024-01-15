@@ -1,4 +1,5 @@
 {
   "source_word": "strife",
-  "destination_word": "peace"
+  "destination_word": "peace",
+  "best_path": ["strife","strafe","strake","stake","spake","space","pace","peace"]
 }

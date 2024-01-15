@@ -1,4 +1,5 @@
 {
   "source_word": "count",
-  "destination_word": "down"
+  "destination_word": "down",
+  "best_path": ["count","fount","font","wont","won","don","down"]
 }

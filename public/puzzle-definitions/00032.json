@@ -1,4 +1,5 @@
 {
   "source_word": "new",
-  "destination_word": "year"
+  "destination_word": "year",
+  "best_path": ["new","yew","yea","year"]
 }

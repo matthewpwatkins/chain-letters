@@ -1,4 +1,5 @@
 {
   "source_word": "dirty",
-  "destination_word": "clean"
+  "destination_word": "clean",
+  "best_path": ["dirty","dirt","dit","din","den","dean","lean","clean"]
 }

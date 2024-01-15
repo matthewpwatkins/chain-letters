@@ -1,4 +1,5 @@
 {
   "source_word": "eye",
-  "destination_word": "see"
+  "destination_word": "see",
+  "best_path": ["eye","bye","bee","see"]
 }

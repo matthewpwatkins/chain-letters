@@ -1,4 +1,5 @@
 {
   "source_word": "hurt",
-  "destination_word": "healed"
+  "destination_word": "healed",
+  "best_path": ["hurt","hart","halt","hale","haled","healed"]
 }

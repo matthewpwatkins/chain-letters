@@ -1,4 +1,5 @@
 {
   "source_word": "watch",
-  "destination_word": "clock"
+  "destination_word": "clock",
+  "best_path": ["watch","match","mach","mack","lack","lock","clock"]
 }

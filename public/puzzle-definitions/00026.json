@@ -1,4 +1,5 @@
 {
   "source_word": "tree",
-  "destination_word": "down"
+  "destination_word": "down",
+  "best_path": ["tree","tee","ten","den","don","down"]
 }

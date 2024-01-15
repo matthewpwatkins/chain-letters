@@ -1,4 +1,5 @@
 {
   "source_word": "water",
-  "destination_word": "steam"
+  "destination_word": "steam",
+  "best_path": ["water","dater","dated","sated","stead","steam"]
 }

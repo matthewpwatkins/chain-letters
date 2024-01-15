@@ -1,4 +1,5 @@
 {
   "source_word": "mouth",
-  "destination_word": "speak"
+  "destination_word": "speak",
+  "best_path": ["mouth","moth","math","mat","eat","peat","peak","speak"]
 }

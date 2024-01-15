@@ -1,4 +1,5 @@
 {
   "source_word": "lead",
-  "destination_word": "gold"
+  "destination_word": "gold",
+  "best_path": ["lead","load","goad","gold"]
 }

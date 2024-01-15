@@ -1,4 +1,5 @@
 {
   "source_word": "hell",
-  "destination_word": "heaven"
+  "destination_word": "heaven",
+  "best_path": ["hell","hall","hale","have","haven","heaven"]
 }

@@ -1,4 +1,5 @@
 {
   "source_word": "out",
-  "destination_word": "side"
+  "destination_word": "side",
+  "best_path": ["out","but","bit","bid","bide","side"]
 }

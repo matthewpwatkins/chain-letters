@@ -1,4 +1,5 @@
 {
   "source_word": "hill",
-  "destination_word": "valley"
+  "destination_word": "valley",
+  "best_path": ["hill","ill","all","ally","alley","valley"]
 }

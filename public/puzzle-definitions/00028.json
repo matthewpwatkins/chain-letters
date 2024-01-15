@@ -1,4 +1,5 @@
 {
   "source_word": "goals",
-  "destination_word": "set"
+  "destination_word": "set",
+  "best_path": ["goals","gals","gal","gat","get","set"]
 }

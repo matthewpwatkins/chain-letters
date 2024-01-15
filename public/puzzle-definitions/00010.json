@@ -1,4 +1,5 @@
 {
   "source_word": "string",
-  "destination_word": "knot"
+  "destination_word": "knot",
+  "best_path": ["string","sting","stink","knits","knit","knot"]
 }

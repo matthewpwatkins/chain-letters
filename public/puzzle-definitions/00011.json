@@ -1,4 +1,5 @@
 {
   "source_word": "nose",
-  "destination_word": "smell"
+  "destination_word": "smell",
+  "best_path": ["nose","dose","dole","doll","dell","mell","smell"]
 }

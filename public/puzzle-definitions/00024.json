@@ -1,4 +1,5 @@
 {
   "source_word": "get",
-  "destination_word": "give"
+  "destination_word": "give",
+  "best_path": ["get","gat","gate","gave","give"]
 }

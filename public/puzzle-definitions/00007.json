@@ -1,4 +1,5 @@
 {
   "source_word": "loud",
-  "destination_word": "soft"
+  "destination_word": "soft",
+  "best_path": ["loud","lout","loft","soft"]
 }

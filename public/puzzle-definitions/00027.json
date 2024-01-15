@@ -1,4 +1,5 @@
 {
   "source_word": "twos",
-  "destination_word": "day"
+  "destination_word": "day",
+  "best_path": ["twos","twas","was","way","day"]
 }

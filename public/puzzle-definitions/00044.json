@@ -1,4 +1,5 @@
 {
   "source_word": "tax",
-  "destination_word": "theft"
+  "destination_word": "theft",
+  "best_path": ["tax","tat","eat","heat","heft","theft"]
 }

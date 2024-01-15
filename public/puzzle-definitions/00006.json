@@ -1,4 +1,5 @@
 {
   "source_word": "wrong",
-  "destination_word": "right"
+  "destination_word": "right",
+  "best_path": ["wrong","wring","ring","sing","sign","sigh","sight","right"]
 }

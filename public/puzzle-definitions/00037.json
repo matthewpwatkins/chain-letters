@@ -1,4 +1,5 @@
 {
   "source_word": "rough",
-  "destination_word": "smooth"
+  "destination_word": "smooth",
+  "best_path": ["rough","cough","couth","south","sooth","smooth"]
 }

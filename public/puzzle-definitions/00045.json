@@ -1,4 +1,5 @@
 {
   "source_word": "mind",
-  "destination_word": "matter"
+  "destination_word": "matter",
+  "best_path": ["mind","mine","mane","mate","mater","matter"]
 }

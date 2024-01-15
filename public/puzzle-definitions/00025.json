@@ -1,4 +1,5 @@
 {
   "source_word": "sinner",
-  "destination_word": "saint"
+  "destination_word": "saint",
+  "best_path": ["sinner","singer","singe","sing","sting","stint","saint"]
 }

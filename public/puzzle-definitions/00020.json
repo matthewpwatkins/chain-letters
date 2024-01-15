@@ -1,4 +1,5 @@
 {
   "source_word": "friend",
-  "destination_word": "wife"
+  "destination_word": "wife",
+  "best_path": ["friend","fiend","find","fine","fife","wife"]
 }

@@ -1,4 +1,5 @@
 {
   "source_word": "dawn",
-  "destination_word": "dusk"
+  "destination_word": "dusk",
+  "best_path": ["dawn","dawk","dank","dunk","dusk"]
 }

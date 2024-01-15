@@ -1,4 +1,5 @@
 {
   "source_word": "panic",
-  "destination_word": "peace"
+  "destination_word": "peace",
+  "best_path": ["panic","manic","magic","magi","mage","mace","pace","peace"]
 }

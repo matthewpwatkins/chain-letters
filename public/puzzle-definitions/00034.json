@@ -1,4 +1,5 @@
 {
   "source_word": "spend",
-  "destination_word": "save"
+  "destination_word": "save",
+  "best_path": ["spend","send","sand","sane","save"]
 }

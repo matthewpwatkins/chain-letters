@@ -1,4 +1,5 @@
 {
   "source_word": "far",
-  "destination_word": "close"
+  "destination_word": "close",
+  "best_path": ["far","for","fore","lore","lose","close"]
 }

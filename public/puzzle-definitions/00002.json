@@ -1,4 +1,5 @@
 {
   "source_word": "please",
-  "destination_word": "thank"
+  "destination_word": "thank",
+  "best_path": ["please","lease","ease","base","bane","bank","tank","thank"]
 }

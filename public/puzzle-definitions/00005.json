@@ -1,4 +1,5 @@
 {
   "source_word": "climb",
-  "destination_word": "fall"
+  "destination_word": "fall",
+  "best_path": ["climb","limb","lamb","lame","male","mall","fall"]
 }

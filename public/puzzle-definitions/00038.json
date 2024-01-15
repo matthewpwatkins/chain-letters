@@ -1,4 +1,5 @@
 {
   "source_word": "shaky",
-  "destination_word": "solid"
+  "destination_word": "solid",
+  "best_path": ["shaky","shake","sake","sale","sole","sold","solid"]
 }
