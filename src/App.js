@@ -380,7 +380,7 @@ const App = () => {
         For example, to here's how you might convert the word "WRONG" to the word "RIGHT."
       </p>
       <p className="text-center">
-        <Image fluid src="https://chainlettersgame.com/example.jpg" className="text-center" />
+        <Image fluid src="https://chainletters.netlify.app/example.jpg" className="text-center" />
       </p>
       <p>The badge at the top shows you the difficulty level of the puzzle and the shortest number of links it can be solved using common words.</p>
       <p>

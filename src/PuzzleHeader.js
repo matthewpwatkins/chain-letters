@@ -14,7 +14,7 @@ export const PuzzleHeader = (props) => {
   return <>
     <h1 className="display-5 my-3 text-center">
       <a className='remove-decoration' href="/">
-        <Image src="https://chainlettersgame.com/android-chrome-192x192.png" className="me-3" style={{
+        <Image src="https://chainletters.netlify.app/android-chrome-192x192.png" className="me-3" style={{
           maxHeight: "2.5rem",
           marginTop: "-.5rem"
         }} />
