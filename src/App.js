@@ -207,23 +207,25 @@ const App = () => {
       isFirst = false;
     }
 
-    console.log('Long URL', longURL);
-    const encodedParams = new URLSearchParams();
-    encodedParams.append("url", longURL);
+    return longURL;
 
-    const options = {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/x-www-form-urlencoded',
-        'X-RapidAPI-Key': 'c02613d5a5msh726328d982e08f2p137f50jsn3b6a0ebeb75c',
-        'X-RapidAPI-Host': 'url-shortener-service.p.rapidapi.com'
-      },
-      body: encodedParams
-    };
+    // console.log('Long URL', longURL);
+    // const encodedParams = new URLSearchParams();
+    // encodedParams.append("url", longURL);
 
-    const shortenerRes = await fetch('https://url-shortener-service.p.rapidapi.com/shorten', options);
-    const res = await shortenerRes.json();
-    return res.result_url;
+    // const options = {
+    //   method: 'POST',
+    //   headers: {
+    //     'content-type': 'application/x-www-form-urlencoded',
+    //     'X-RapidAPI-Key': 'c02613d5a5msh726328d982e08f2p137f50jsn3b6a0ebeb75c',
+    //     'X-RapidAPI-Host': 'url-shortener-service.p.rapidapi.com'
+    //   },
+    //   body: encodedParams
+    // };
+
+    // const shortenerRes = await fetch('https://url-shortener-service.p.rapidapi.com/shorten', options);
+    // const res = await shortenerRes.json();
+    // return res.result_url;
   }
 
   const share = async () => {
